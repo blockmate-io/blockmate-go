@@ -1,0 +1,2350 @@
+openapi: 3.0.3
+info:
+  description: Blockmate API OpenAPI documentation
+  termsOfService: https://www.blockmate.io/term/terms-and-conditions
+  title: Blockmate
+  version: 0.0.1
+servers:
+- url: /
+security:
+- UserJWT: []
+- ProjectJWT: []
+- ProjectToken: []
+paths:
+  /v1/auth:
+    get:
+      operationId: UserAPI-AuthenticateProject
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_200_response'
+          description: Returns a JWT for ProjectJWT
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Authenticate project
+      tags:
+      - Authentication
+  /v1/auth/developer:
+    get:
+      operationId: UserAPI-AuthenticateDeveloper
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_200_response'
+          description: "Returns a JWT for UserJWT. This is a special user, mapped\
+            \ to the project. If you want to have multiple users, see User management."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Authenticate developer
+      tags:
+      - Authentication
+  /v1/users:
+    get:
+      operationId: ListUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: List users
+      tags:
+      - User management
+    post:
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser_request'
+        description: User
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: User
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Create user
+      tags:
+      - User management
+  /v1/users/{id}:
+    delete:
+      operationId: DeleteUser
+      parameters:
+      - description: User id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 4301140e-d639-11ec-9120-00155d03ab64
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUser_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUser_404_response'
+          description: Not Found
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Delete user
+      tags:
+      - User management
+    get:
+      operationId: GetUser
+      parameters:
+      - description: User id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 4301140e-d639-11ec-9120-00155d03ab64
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUser_404_response'
+          description: Not found
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Get user
+      tags:
+      - User management
+    post:
+      operationId: UpdateUser
+      parameters:
+      - description: User id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 4301140e-d639-11ec-9120-00155d03ab64
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser_request'
+        description: User
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: User
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUser_404_response'
+          description: Not found
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Update user
+      tags:
+      - User management
+  /v1/users/{id}/auth:
+    get:
+      operationId: AuthUser
+      parameters:
+      - description: User id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 4301140e-d639-11ec-9120-00155d03ab64
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthUser_200_response'
+          description: UserJWT
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUser_404_response'
+          description: Not Found
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Authentication
+        url: https://auth.blockmate.io
+      summary: Authenticate user
+      tags:
+      - User management
+  /v1/aggregate/account_providers:
+    get:
+      operationId: AccountProvidersList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountProvider'
+          description: List of account providers
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Get list of account providers
+      tags:
+      - Aggregated info
+  /v1/aggregate/account_provider_hints:
+    get:
+      operationId: AccountProviderHintsList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountProviderHint'
+          description: List of account providers hints
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Get list of account providers hints
+      tags:
+      - Aggregated info
+  /v1/aggregate/accounts:
+    get:
+      operationId: Accounts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
+          description: List of user accounts.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: List accounts
+      tags:
+      - Aggregated info
+  /v1/aggregate/balance:
+    get:
+      operationId: Balance
+      parameters:
+      - description: |
+          Currency to convert to.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          example: USD
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance_200_response'
+          description: Cumulated balance fo user accounts.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Get balance
+      tags:
+      - Aggregated info
+  /v1/aggregate/transactions:
+    get:
+      operationId: Transactions
+      parameters:
+      - description: |
+          Set time from which the transactions will be get.
+          The parameter is passed as-is to backend services.
+          The default value is 30 days before the actual date or 30 days before the date specified in "until" parameter.
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          example: 2020-01-01
+          format: date
+          pattern: "^[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$"
+          type: string
+        style: form
+      - description: |
+          Set time to which the transactions will be get.
+          The parameter is passed as-is to backend services.
+          The default value is the actual date.
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          example: 2020-02-01
+          format: date
+          pattern: "^[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$"
+          type: string
+        style: form
+      - description: |
+          Currency to convert to.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          example: USD
+          type: string
+        style: form
+      - description: |
+          Filter results to only provided account.
+          When omitted, it returns all transactions from all accounts.
+        explode: true
+        in: query
+        name: account-filter
+        required: false
+        schema:
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions_200_response'
+          description: Get user transactions.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Get transactions
+      tags:
+      - Aggregated info
+  /v1/{account_provider}/connect:
+    get:
+      operationId: GetAccountHint
+      parameters:
+      - description: URL value from account_providers method
+        explode: false
+        in: path
+        name: account_provider
+        required: true
+        schema:
+          example: onchain/btc
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountHint_200_response'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountHint_403_response'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountHint_404_response'
+          description: Not found
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Get account hint
+      tags:
+      - Account provider info
+    post:
+      operationId: ConnectAccount
+      parameters:
+      - description: URL value from account_providers method
+        explode: false
+        in: path
+        name: account_provider
+        required: true
+        schema:
+          example: onchain/btc
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectAccount_request'
+        description: OK
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectAccount_200_response'
+          description: User
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectAccount_400_response'
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountHint_403_response'
+          description: Forbidden
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectAccount_405_response'
+          description: Method Not Allowed
+      security:
+      - ProjectToken: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Connect new account
+      tags:
+      - Account provider info
+  /v1/{account_provider}/account/{account_id}:
+    delete:
+      operationId: DeleteAccount
+      parameters:
+      - description: URL value from account_providers method
+        explode: false
+        in: path
+        name: account_provider
+        required: true
+        schema:
+          example: onchain/btc
+          type: string
+        style: simple
+      - description: Account ID
+        explode: false
+        in: path
+        name: account_id
+        required: true
+        schema:
+          example: 163b6df1-dc0b-4086-8922-6068fe1e653d
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountHint_403_response'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAccount_404_response'
+          description: Not found
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://aisp-api.blockmate.io
+      summary: Delete account
+      tags:
+      - Account provider info
+  /v1/risk/score:
+    get:
+      operationId: GetAddressRiskScore
+      parameters:
+      - description: Address for which risk should be returned
+        explode: true
+        in: query
+        name: address
+        required: false
+        schema:
+          example: bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq
+          type: string
+        style: form
+      - description: Blockchain identifier
+        explode: true
+        in: query
+        name: chain
+        required: false
+        schema:
+          example: btc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAddressRiskScore_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://risk-api.blockmate.io
+      summary: Get address risk score
+      tags:
+      - Risk info
+  /v1/risk/score/details:
+    get:
+      operationId: GetAddressRiskScoreDetails
+      parameters:
+      - description: Address for which risk should be returned
+        explode: true
+        in: query
+        name: address
+        required: false
+        schema:
+          example: bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq
+          type: string
+        style: form
+      - description: Blockchain identifier
+        explode: true
+        in: query
+        name: chain
+        required: false
+        schema:
+          example: btc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressRiskReport'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://risk-api.blockmate.io
+      summary: Get address risk score details
+      tags:
+      - Risk info
+  /v1/risk/score/details/{case_id}:
+    get:
+      operationId: GetAddressRiskScoreCase
+      parameters:
+      - description: Case identifier
+        explode: false
+        in: path
+        name: case_id
+        required: true
+        schema:
+          example: 7c656013-5e9b-4c71-8322-6562c5a9b34c
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressRiskReport'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://risk-api.blockmate.io
+      summary: Get address risk score case
+      tags:
+      - Risk info
+  /v1/risk/transaction/score:
+    get:
+      operationId: GetTransactionRiskScore
+      parameters:
+      - description: Transaction hash for which risk should be returned
+        explode: true
+        in: query
+        name: transaction
+        required: false
+        schema:
+          example: 0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205
+          type: string
+        style: form
+      - description: Blockchain identifier
+        explode: true
+        in: query
+        name: chain
+        required: false
+        schema:
+          example: btc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionRiskScore_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://risk-api.blockmate.io
+      summary: Get transaction risk score
+      tags:
+      - Risk info
+  /v1/risk/transaction/score/details:
+    get:
+      operationId: GetTransactionRiskScoreDetails
+      parameters:
+      - description: Transaction hash for which risk should be returned
+        explode: true
+        in: query
+        name: transaction
+        required: false
+        schema:
+          example: 0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205
+          type: string
+        style: form
+      - description: Blockchain identifier
+        explode: true
+        in: query
+        name: chain
+        required: false
+        schema:
+          example: btc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRiskReport'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://risk-api.blockmate.io
+      summary: Get transaction risk score details
+      tags:
+      - Risk info
+  /v1/risk/transaction/score/details/{case_id}:
+    get:
+      operationId: GetTransactionRiskScoreCase
+      parameters:
+      - description: Case identifier
+        explode: false
+        in: path
+        name: case_id
+        required: true
+        schema:
+          example: 7149168f-ad69-4fc9-b027-a16b0ca13081
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRiskReport'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://risk-api.blockmate.io
+      summary: Get transaction risk score case
+      tags:
+      - Risk info
+  /v1/exchangerate/current:
+    get:
+      operationId: GetCurrentExchangeRate
+      parameters:
+      - description: Currency pairs for which exchange rate should be returned
+        explode: true
+        in: query
+        name: pairs
+        required: true
+        schema:
+          example: "ETH/USD,BTC/EUR"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExchangeRate'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://data-api.blockmate.io
+      summary: Get current exchange rate
+      tags:
+      - Exchange rate info
+  /v1/exchangerate/history:
+    get:
+      operationId: GetHistoricalExchangeRate
+      parameters:
+      - description: Currency pair for which exchange rates should be returned
+        explode: true
+        in: query
+        name: pair
+        required: true
+        schema:
+          example: ETH/USD
+          type: string
+        style: form
+      - description: Historical dates for which exchange rates should be returned
+        explode: true
+        in: query
+        name: days
+        required: true
+        schema:
+          example: "2022-06-30,2022-06-29"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExchangeRate'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://data-api.blockmate.io
+      summary: Get historical exchange rate
+      tags:
+      - Exchange rate info
+  /v1/addressname/simple:
+    get:
+      operationId: GetAddressNameInfo
+      parameters:
+      - description: Address for wich name and category should be returned
+        explode: true
+        in: query
+        name: address
+        required: true
+        schema:
+          example: bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq
+          type: string
+        style: form
+      - description: Blockchain identifier
+        explode: true
+        in: query
+        name: chain
+        required: true
+        schema:
+          example: btc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAddressNameInfo_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      servers:
+      - description: Call
+        url: https://data-api.blockmate.io
+      summary: Get address name and category info
+      tags:
+      - Address name and category info
+components:
+  schemas:
+    User:
+      description: Represents a user
+      example:
+        name: some-name
+        uuid: 4301140e-d639-11ec-9120-00155d03ab64
+      properties:
+        uuid:
+          example: 4301140e-d639-11ec-9120-00155d03ab64
+          type: string
+        name:
+          example: some-name
+          type: string
+      required:
+      - name
+      - uuid
+      title: User
+      type: object
+    AccountProvider:
+      description: Account provider
+      example:
+        name: btc
+        type: crypto_wallet
+        url: onchain/bitcoin
+      properties:
+        name:
+          example: btc
+          type: string
+        type:
+          enum:
+          - crypto_wallet
+          - crypto_exchange
+          - crypto_nft
+          example: crypto_wallet
+          type: string
+        url:
+          example: onchain/bitcoin
+          type: string
+      required:
+      - name
+      - type
+      - url
+      title: Account Provider
+      type: object
+    Amount:
+      description: Amount
+      example:
+        image_name: Alvibop
+        currency_name: Tether USD
+        currency_symbol: USDT
+        image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+        currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+        value: 1.2
+      properties:
+        value:
+          example: 1.2
+          type: number
+        currency:
+          example: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          type: string
+        currency_name:
+          example: Tether USD
+          type: string
+        currency_symbol:
+          example: USDT
+          type: string
+        image_name:
+          example: Alvibop
+          nullable: true
+          type: string
+        image_url:
+          example: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          nullable: true
+          type: string
+      required:
+      - currency
+      - currency_name
+      - currency_symbol
+      - value
+      title: Amount
+      type: object
+    Movement:
+      description: Movement
+      example:
+        image_name: Alvibop
+        address: 0xc50e6db1637423819edbccb20b15654338d65501
+        currency_name: Tether USD
+        currency_symbol: USDT
+        owned: true
+        image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+        fee: false
+        currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+        value: 1.2
+      properties:
+        address:
+          example: 0xc50e6db1637423819edbccb20b15654338d65501
+          type: string
+        currency:
+          example: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          type: string
+        currency_name:
+          example: Tether USD
+          type: string
+        currency_symbol:
+          example: USDT
+          type: string
+        value:
+          example: 1.2
+          type: number
+        owned:
+          example: true
+          type: boolean
+        fee:
+          example: false
+          type: boolean
+        image_name:
+          example: Alvibop
+          nullable: true
+          type: string
+        image_url:
+          example: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          nullable: true
+          type: string
+      required:
+      - address
+      - currency
+      - currency_name
+      - currency_symbol
+      - fee
+      - owned
+      - value
+      title: Movement
+      type: object
+    AccountProviderHint:
+      description: Account provider hint containing info about what is needed to connect
+        such an account
+      example:
+        account_type: crypto_wallet
+        account_name: btc
+        intro: Use your address to connect your account.
+        account_url: onchain/btc
+        description: Bitcoin (BTC)
+        fields:
+          wallet: Address
+          api_key: API Key
+          api_passphrase: API Passphrase
+          description: Account description
+          api_secret: API Secret
+        oauth: false
+        url: https://bitcoin.com
+      properties:
+        account_name:
+          example: btc
+          type: string
+        account_type:
+          enum:
+          - crypto_wallet
+          - crypto_exchange
+          - crypto_nft
+          example: crypto_wallet
+          type: string
+        account_url:
+          example: onchain/btc
+          type: string
+        description:
+          example: Bitcoin (BTC)
+          type: string
+        url:
+          example: https://bitcoin.com
+          type: string
+        intro:
+          example: Use your address to connect your account.
+          type: string
+        fields:
+          $ref: '#/components/schemas/AccountProviderHint_fields'
+        oauth:
+          example: false
+          type: boolean
+      required:
+      - account_name
+      - account_type
+      - account_url
+      - description
+      - fields
+      - info
+      - oauth
+      - url
+      title: Account Provider Hint
+      type: object
+    AddressRiskReport:
+      description: AddressRiskReport
+      example:
+        chain: eth
+        address: 0xc50e6db1637423819edbccb20b15654338d65501
+        case_id: 7c656013-5e9b-4c71-8322-6562c5a9b34c
+        risk: 85
+        details:
+          own_categories:
+          - category_name: some-category-name
+            name: some-name
+            adress: 0xc50e6db1637423819edbccb20b15654338d65501
+            risk: 85
+          - category_name: some-category-name
+            name: some-name
+            adress: 0xc50e6db1637423819edbccb20b15654338d65501
+            risk: 85
+          source_of_funds_categories:
+          - category_name: some-category-name
+            name: some-name
+            adress: 0xc50e6db1637423819edbccb20b15654338d65501
+            risk: 85
+          - category_name: some-category-name
+            name: some-name
+            adress: 0xc50e6db1637423819edbccb20b15654338d65501
+            risk: 85
+        request_datetime: 2022-10-04T12:32:44Z
+        response_datetime: 2022-10-04T12:32:44Z
+      properties:
+        case_id:
+          example: 7c656013-5e9b-4c71-8322-6562c5a9b34c
+          type: string
+        request_datetime:
+          example: 2022-10-04T12:32:44Z
+          type: string
+        response_datetime:
+          example: 2022-10-04T12:32:44Z
+          type: string
+        address:
+          example: 0xc50e6db1637423819edbccb20b15654338d65501
+          type: string
+        chain:
+          example: eth
+          type: string
+        risk:
+          example: 85
+          maximum: 100
+          minimum: 0
+          type: integer
+        details:
+          $ref: '#/components/schemas/AddressRiskReport_details'
+      required:
+      - address
+      - chain
+      - details
+      - risk
+      title: AddressRiskReport
+      type: object
+    TransactionRiskReport:
+      description: TransactionRiskReport
+      example:
+        chain: btc
+        case_id: 7149168f-ad69-4fc9-b027-a16b0ca13081
+        risk: 85
+        details:
+          key:
+            own_categories:
+            - category_name: some-category-name
+              name: some-name
+              adress: 0xc50e6db1637423819edbccb20b15654338d65501
+              risk: 85
+            - category_name: some-category-name
+              name: some-name
+              adress: 0xc50e6db1637423819edbccb20b15654338d65501
+              risk: 85
+            source_of_funds_categories:
+            - category_name: some-category-name
+              name: some-name
+              adress: 0xc50e6db1637423819edbccb20b15654338d65501
+              risk: 85
+            - category_name: some-category-name
+              name: some-name
+              adress: 0xc50e6db1637423819edbccb20b15654338d65501
+              risk: 85
+        request_datetime: 2022-10-04T12:32:44Z
+        response_datetime: 2022-10-04T12:32:44Z
+        transaction: 0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205
+      properties:
+        case_id:
+          example: 7149168f-ad69-4fc9-b027-a16b0ca13081
+          type: string
+        request_datetime:
+          example: 2022-10-04T12:32:44Z
+          type: string
+        response_datetime:
+          example: 2022-10-04T12:32:44Z
+          type: string
+        transaction:
+          example: 0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205
+          type: string
+        chain:
+          example: btc
+          type: string
+        risk:
+          example: 85
+          maximum: 100
+          minimum: 0
+          type: integer
+        details:
+          additionalProperties:
+            $ref: '#/components/schemas/AddressRiskReport_details'
+          description: Keys are addresses from transaction inputs or outputs
+          type: object
+      required:
+      - address
+      - chain
+      - details
+      - risk
+      title: TransactionRiskReport
+      type: object
+    RiskReportCategory:
+      description: RiskReportCategory
+      example:
+        category_name: some-category-name
+        name: some-name
+        adress: 0xc50e6db1637423819edbccb20b15654338d65501
+        risk: 85
+      properties:
+        adress:
+          example: 0xc50e6db1637423819edbccb20b15654338d65501
+          type: string
+        name:
+          example: some-name
+          type: string
+        category_name:
+          example: some-category-name
+          type: string
+        risk:
+          example: 85
+          maximum: 100
+          minimum: 0
+          type: integer
+      required:
+      - category_name
+      - name
+      - risk
+      title: RiskReportCategory
+      type: object
+    ExchangeRate:
+      description: ExchangeRate
+      example:
+        date: 2022-06-30
+        currency_pair: ETH/USD
+        rate: 1053.9613
+      properties:
+        currency_pair:
+          example: ETH/USD
+          type: string
+        date:
+          example: 2022-06-30
+          type: string
+        rate:
+          example: 1053.9613
+          type: number
+      required:
+      - currency_pair
+      - date
+      - rate
+      title: ExchangeRate
+      type: object
+    UserAPI_AuthenticateProject_200_response:
+      example:
+        token: some-token
+      properties:
+        token:
+          example: some-token
+          type: string
+      required:
+      - token
+      type: object
+    UserAPI_AuthenticateProject_400_response:
+      properties:
+        message:
+          example: missing key in request header
+          type: string
+      type: object
+    UserAPI_AuthenticateProject_401_response:
+      properties:
+        message:
+          example: Unauthorized
+          type: string
+      type: object
+    CreateUser_request:
+      properties:
+        name:
+          example: some-name
+          type: string
+      type: object
+    GetUser_404_response:
+      properties:
+        message:
+          type: string
+      type: object
+    DeleteUser_200_response:
+      example:
+        message: OK
+      properties:
+        message:
+          example: OK
+          type: string
+      type: object
+    DeleteUser_404_response:
+      properties:
+        message:
+          example: Not Found
+          type: string
+      type: object
+    AuthUser_200_response:
+      example:
+        token: some-token
+      properties:
+        token:
+          description: UserJWT
+          example: some-token
+          type: string
+      type: object
+    Account:
+      description: Represents an account.
+      example:
+        name: btc
+        verified: true
+        description: My account
+        id: 4cf7cf36-52a2-11ec-85b8-00155de33000
+        type: crypto_wallet
+        url: onchain/bitcoin/account/4cf7cf36-52a2-11ec-85b8-00155de33000
+      properties:
+        id:
+          example: 4cf7cf36-52a2-11ec-85b8-00155de33000
+          type: string
+        name:
+          example: btc
+          type: string
+        description:
+          example: My account
+          type: string
+        verified:
+          example: true
+          type: boolean
+        type:
+          enum:
+          - crypto_wallet
+          - crypto_exchange
+          - crypto_nft
+          example: crypto_wallet
+          type: string
+        url:
+          example: onchain/bitcoin/account/4cf7cf36-52a2-11ec-85b8-00155de33000
+          type: string
+      required:
+      - description
+      - id
+      - name
+      - type
+      - url
+      - verified
+      title: Account
+      type: object
+    Balance_response_accounts_inner_state:
+      example:
+        last_sync: 2022-07-21T09:21:37.384496+00:00
+      properties:
+        last_sync:
+          description: null if initial sync was not yet done
+          example: 2022-07-21T09:21:37.384496+00:00
+          nullable: true
+          type: string
+      type: object
+    Balance_response_accounts_inner:
+      example:
+        account_id: 9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e
+        balance:
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        name: some-name
+        verified: true
+        description: My account
+        state:
+          last_sync: 2022-07-21T09:21:37.384496+00:00
+        type: crypto_wallet
+        url: some-url
+      properties:
+        account_id:
+          example: 9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e
+          type: string
+        description:
+          example: My account
+          type: string
+        type:
+          enum:
+          - crypto_wallet
+          - crypto_exchange
+          - crypto_nft
+          type: string
+        balance:
+          items:
+            $ref: '#/components/schemas/Amount'
+          type: array
+        state:
+          $ref: '#/components/schemas/Balance_response_accounts_inner_state'
+        name:
+          example: some-name
+          type: string
+        verified:
+          example: true
+          type: boolean
+        url:
+          example: some-url
+          type: string
+      required:
+      - account_id
+      - balance
+      - description
+      - name
+      - state
+      - type
+      - url
+      - verified
+      type: object
+    Balance_response:
+      description: Represents a response from aggregated balance request.
+      example:
+        balance_sum:
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        accounts:
+        - account_id: 9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e
+          balance:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          name: some-name
+          verified: true
+          description: My account
+          state:
+            last_sync: 2022-07-21T09:21:37.384496+00:00
+          type: crypto_wallet
+          url: some-url
+        - account_id: 9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e
+          balance:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          name: some-name
+          verified: true
+          description: My account
+          state:
+            last_sync: 2022-07-21T09:21:37.384496+00:00
+          type: crypto_wallet
+          url: some-url
+      properties:
+        balance_sum:
+          items:
+            $ref: '#/components/schemas/Amount'
+          type: array
+        accounts:
+          items:
+            $ref: '#/components/schemas/Balance_response_accounts_inner'
+          type: array
+      required:
+      - accounts
+      - balance_sum
+      title: Balance response
+      type: object
+    Balance_200_response:
+      example:
+        balance:
+          balance_sum:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          accounts:
+          - account_id: 9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e
+            balance:
+            - image_name: Alvibop
+              currency_name: Tether USD
+              currency_symbol: USDT
+              image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+              currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+              value: 1.2
+            - image_name: Alvibop
+              currency_name: Tether USD
+              currency_symbol: USDT
+              image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+              currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+              value: 1.2
+            name: some-name
+            verified: true
+            description: My account
+            state:
+              last_sync: 2022-07-21T09:21:37.384496+00:00
+            type: crypto_wallet
+            url: some-url
+          - account_id: 9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e
+            balance:
+            - image_name: Alvibop
+              currency_name: Tether USD
+              currency_symbol: USDT
+              image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+              currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+              value: 1.2
+            - image_name: Alvibop
+              currency_name: Tether USD
+              currency_symbol: USDT
+              image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+              currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+              value: 1.2
+            name: some-name
+            verified: true
+            description: My account
+            state:
+              last_sync: 2022-07-21T09:21:37.384496+00:00
+            type: crypto_wallet
+            url: some-url
+      properties:
+        balance:
+          $ref: '#/components/schemas/Balance_response'
+      required:
+      - balance
+      type: object
+    Transactions_200_response_accounts_inner:
+      example:
+        verified: true
+        description: My account
+        id: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+        state:
+          last_sync: 2022-07-21T09:21:37.384496+00:00
+        type: crypto_wallet
+      properties:
+        id:
+          example: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+          type: string
+        description:
+          example: My account
+          type: string
+        verified:
+          example: true
+          type: boolean
+        type:
+          enum:
+          - crypto_wallet
+          - crypto_exchange
+          - crypto_nft
+          example: crypto_wallet
+          type: string
+        state:
+          $ref: '#/components/schemas/Balance_response_accounts_inner_state'
+      required:
+      - description
+      - id
+      - state
+      - type
+      - verified
+      type: object
+    Transaction:
+      description: Represents a transaction.
+      example:
+        transaction_id: 0xf77c19d9333bb26fd9d6773a18a8b5fd145e2fbb514ff2879cb478e13e2f8c23
+        outputs:
+        - image_name: Alvibop
+          address: 0xc50e6db1637423819edbccb20b15654338d65501
+          currency_name: Tether USD
+          currency_symbol: USDT
+          owned: true
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          fee: false
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          address: 0xc50e6db1637423819edbccb20b15654338d65501
+          currency_name: Tether USD
+          currency_symbol: USDT
+          owned: true
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          fee: false
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        side: some-side
+        amount:
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        total:
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        account_id: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+        inputs:
+        - image_name: Alvibop
+          address: 0xc50e6db1637423819edbccb20b15654338d65501
+          currency_name: Tether USD
+          currency_symbol: USDT
+          owned: true
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          fee: false
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          address: 0xc50e6db1637423819edbccb20b15654338d65501
+          currency_name: Tether USD
+          currency_symbol: USDT
+          owned: true
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          fee: false
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        fee:
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        - image_name: Alvibop
+          currency_name: Tether USD
+          currency_symbol: USDT
+          image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+          currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+          value: 1.2
+        created_at: 2022-07-21T09:21:37.384496+00:00
+        type: crypto_wallet
+      properties:
+        account_id:
+          example: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+          type: string
+        transaction_id:
+          example: 0xf77c19d9333bb26fd9d6773a18a8b5fd145e2fbb514ff2879cb478e13e2f8c23
+          type: string
+        type:
+          enum:
+          - crypto_wallet
+          - crypto_exchange
+          - crypto_nft
+          example: crypto_wallet
+          type: string
+        side:
+          example: some-side
+          type: string
+        amount:
+          items:
+            $ref: '#/components/schemas/Amount'
+          type: array
+        total:
+          items:
+            $ref: '#/components/schemas/Amount'
+          type: array
+        fee:
+          items:
+            $ref: '#/components/schemas/Amount'
+          type: array
+        created_at:
+          example: 2022-07-21T09:21:37.384496+00:00
+          type: string
+        inputs:
+          items:
+            $ref: '#/components/schemas/Movement'
+          type: array
+        outputs:
+          items:
+            $ref: '#/components/schemas/Movement'
+          type: array
+      required:
+      - account_id
+      - amount
+      - created_at
+      - fee
+      - inputs
+      - outputs
+      - total
+      - transaction_id
+      - type
+      title: Transaction
+      type: object
+    Transactions_200_response:
+      example:
+        accounts:
+        - verified: true
+          description: My account
+          id: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+          state:
+            last_sync: 2022-07-21T09:21:37.384496+00:00
+          type: crypto_wallet
+        - verified: true
+          description: My account
+          id: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+          state:
+            last_sync: 2022-07-21T09:21:37.384496+00:00
+          type: crypto_wallet
+        transactions:
+        - transaction_id: 0xf77c19d9333bb26fd9d6773a18a8b5fd145e2fbb514ff2879cb478e13e2f8c23
+          outputs:
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          side: some-side
+          amount:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          total:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          account_id: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+          inputs:
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          fee:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          created_at: 2022-07-21T09:21:37.384496+00:00
+          type: crypto_wallet
+        - transaction_id: 0xf77c19d9333bb26fd9d6773a18a8b5fd145e2fbb514ff2879cb478e13e2f8c23
+          outputs:
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          side: some-side
+          amount:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          total:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          account_id: 0940bb4a-0940-11ed-9ed1-00155d5116f0
+          inputs:
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            address: 0xc50e6db1637423819edbccb20b15654338d65501
+            currency_name: Tether USD
+            currency_symbol: USDT
+            owned: true
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            fee: false
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          fee:
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          - image_name: Alvibop
+            currency_name: Tether USD
+            currency_symbol: USDT
+            image_url: https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4
+            currency: ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7
+            value: 1.2
+          created_at: 2022-07-21T09:21:37.384496+00:00
+          type: crypto_wallet
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/Transactions_200_response_accounts_inner'
+          type: array
+        transactions:
+          items:
+            $ref: '#/components/schemas/Transaction'
+          type: array
+      required:
+      - transactions
+      type: object
+    GetAccountHint_200_response_fields:
+      additionalProperties:
+        type: string
+      example:
+        wallet: Address
+        description: Account description
+      properties:
+        description:
+          example: Account description
+          type: string
+        wallet:
+          example: Address
+          type: string
+      type: object
+    GetAccountHint_200_response:
+      example:
+        intro: Use your address to connect your account.
+        description: Bitcoin (BTC)
+        fields:
+          wallet: Address
+          description: Account description
+        oauth: false
+        url: some-url
+      properties:
+        description:
+          example: Bitcoin (BTC)
+          type: string
+        url:
+          example: some-url
+          type: string
+        intro:
+          example: Use your address to connect your account.
+          type: string
+        fields:
+          $ref: '#/components/schemas/GetAccountHint_200_response_fields'
+        oauth:
+          example: false
+          type: boolean
+      required:
+      - description
+      - fields
+      - intro
+      - oauth
+      - url
+      type: object
+    GetAccountHint_403_response:
+      properties:
+        detail:
+          example: Invalid token or expired token.
+          type: string
+      type: object
+    GetAccountHint_404_response:
+      properties:
+        status:
+          example: not_found
+          type: string
+      type: object
+    ConnectAccount_request:
+      properties:
+        wallet:
+          example: bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq
+          type: string
+        description:
+          example: some-description
+          type: string
+      required:
+      - description
+      - wallet
+      type: object
+    ConnectAccount_200_response:
+      example:
+        name: some-name
+        verified: false
+        description: some-description
+        id: 163b6df1-dc0b-4086-8922-6068fe1e653d
+      properties:
+        id:
+          example: 163b6df1-dc0b-4086-8922-6068fe1e653d
+          type: string
+        name:
+          example: some-name
+          type: string
+        description:
+          example: some-description
+          type: string
+        verified:
+          example: false
+          type: boolean
+      required:
+      - description
+      - id
+      - name
+      - verified
+      type: object
+    ConnectAccount_400_response:
+      properties:
+        detail:
+          example: Account wallet already connected.
+          type: string
+      type: object
+    ConnectAccount_405_response:
+      properties:
+        detail:
+          example: Method Not Allowed
+          type: string
+      type: object
+    DeleteAccount_404_response:
+      properties:
+        detail:
+          example: Not Found
+          type: string
+      type: object
+    GetAddressRiskScore_200_response:
+      example:
+        address: bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq
+        risk: 85
+      properties:
+        address:
+          example: bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq
+          type: string
+        risk:
+          example: 85
+          maximum: 100
+          minimum: 0
+          type: integer
+      type: object
+    GetTransactionRiskScore_200_response:
+      example:
+        address: 0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205
+        risk: 85
+      properties:
+        address:
+          example: 0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205
+          type: string
+        risk:
+          example: 85
+          maximum: 100
+          minimum: 0
+          type: integer
+      type: object
+    GetAddressNameInfo_200_response:
+      example:
+        name: some-name
+        category: some-category
+      properties:
+        name:
+          example: some-name
+          type: string
+        category:
+          example: some-category
+          type: string
+      type: object
+    AccountProviderHint_fields:
+      additionalProperties:
+        type: string
+      example:
+        wallet: Address
+        api_key: API Key
+        api_passphrase: API Passphrase
+        description: Account description
+        api_secret: API Secret
+      properties:
+        api_key:
+          example: API Key
+          type: string
+        api_secret:
+          example: API Secret
+          type: string
+        api_passphrase:
+          example: API Passphrase
+          type: string
+        description:
+          example: Account description
+          type: string
+        wallet:
+          example: Address
+          type: string
+      type: object
+    AddressRiskReport_details:
+      example:
+        own_categories:
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+        source_of_funds_categories:
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+      properties:
+        own_categories:
+          items:
+            $ref: '#/components/schemas/RiskReportCategory'
+          type: array
+        source_of_funds_categories:
+          items:
+            $ref: '#/components/schemas/RiskReportCategory'
+          type: array
+      type: object
+  securitySchemes:
+    UserJWT:
+      bearerFormat: JWT
+      description: User JWT Token
+      scheme: bearer
+      type: http
+    ProjectJWT:
+      bearerFormat: JWT
+      description: Project JWT Token
+      scheme: bearer
+      type: http
+    ProjectToken:
+      description: Project Token used to manage users and to get JWT tokens used outside
+        of Authentication API
+      in: header
+      name: X-API-KEY
+      type: apiKey
