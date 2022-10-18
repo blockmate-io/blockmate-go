@@ -16,6 +16,8 @@ import (
 
 // Transactions200Response struct for Transactions200Response
 type Transactions200Response struct {
+	// Use this as `cursor` in the next request to get the next page. The `page_cursor` has a one hour validity.
+	PageCursor *string `json:"page_cursor,omitempty"`
 	Accounts []Transactions200ResponseAccountsInner `json:"accounts,omitempty"`
 	Transactions []Transaction `json:"transactions"`
 }
@@ -36,6 +38,38 @@ func NewTransactions200Response(transactions []Transaction) *Transactions200Resp
 func NewTransactions200ResponseWithDefaults() *Transactions200Response {
 	this := Transactions200Response{}
 	return &this
+}
+
+// GetPageCursor returns the PageCursor field value if set, zero value otherwise.
+func (o *Transactions200Response) GetPageCursor() string {
+	if o == nil || o.PageCursor == nil {
+		var ret string
+		return ret
+	}
+	return *o.PageCursor
+}
+
+// GetPageCursorOk returns a tuple with the PageCursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transactions200Response) GetPageCursorOk() (*string, bool) {
+	if o == nil || o.PageCursor == nil {
+		return nil, false
+	}
+	return o.PageCursor, true
+}
+
+// HasPageCursor returns a boolean if a field has been set.
+func (o *Transactions200Response) HasPageCursor() bool {
+	if o != nil && o.PageCursor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPageCursor gets a reference to the given string and assigns it to the PageCursor field.
+func (o *Transactions200Response) SetPageCursor(v string) {
+	o.PageCursor = &v
 }
 
 // GetAccounts returns the Accounts field value if set, zero value otherwise.
@@ -96,6 +130,9 @@ func (o *Transactions200Response) SetTransactions(v []Transaction) {
 
 func (o Transactions200Response) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.PageCursor != nil {
+		toSerialize["page_cursor"] = o.PageCursor
+	}
 	if o.Accounts != nil {
 		toSerialize["accounts"] = o.Accounts
 	}

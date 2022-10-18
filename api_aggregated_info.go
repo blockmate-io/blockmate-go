@@ -501,19 +501,33 @@ type ApiTransactionsRequest struct {
 	ApiService *AggregatedInfoApiService
 	since *string
 	until *string
+	limit *float32
+	cursor *string
 	currency *string
 	accountFilter *string
 }
 
-// Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. 
+// Set time from which the transactions will be get. 
 func (r ApiTransactionsRequest) Since(since string) ApiTransactionsRequest {
 	r.since = &since
 	return r
 }
 
-// Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. 
+// Set time to which the transactions will be get. The default value is the actual date. 
 func (r ApiTransactionsRequest) Until(until string) ApiTransactionsRequest {
 	r.until = &until
+	return r
+}
+
+// Limit the number of the transactions in the response. Default page size is 50. 
+func (r ApiTransactionsRequest) Limit(limit float32) ApiTransactionsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. 
+func (r ApiTransactionsRequest) Cursor(cursor string) ApiTransactionsRequest {
+	r.cursor = &cursor
 	return r
 }
 
@@ -572,6 +586,12 @@ func (a *AggregatedInfoApiService) TransactionsExecute(r ApiTransactionsRequest)
 	}
 	if r.until != nil {
 		localVarQueryParams.Add("until", parameterToString(*r.until, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
+	}
+	if r.cursor != nil {
+		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
 	}
 	if r.currency != nil {
 		localVarQueryParams.Add("currency", parameterToString(*r.currency, ""))
