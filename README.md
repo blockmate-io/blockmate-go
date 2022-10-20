@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *AggregatedInfoApi* | [**AccountProvidersList**](docs/AggregatedInfoApi.md#accountproviderslist) | **Get** /v1/aggregate/account_providers | Get list of account providers
 *AggregatedInfoApi* | [**Accounts**](docs/AggregatedInfoApi.md#accounts) | **Get** /v1/aggregate/accounts | List accounts
 *AggregatedInfoApi* | [**Balance**](docs/AggregatedInfoApi.md#balance) | **Get** /v1/aggregate/balance | Get balance
+*AggregatedInfoApi* | [**NFTMetadata**](docs/AggregatedInfoApi.md#nftmetadata) | **Get** /v1/aggregate/nft_metadata | Get NFT metadata
 *AggregatedInfoApi* | [**Transactions**](docs/AggregatedInfoApi.md#transactions) | **Get** /v1/aggregate/transactions | Get transactions
 *AuthenticationApi* | [**UserAPIAuthenticateDeveloper**](docs/AuthenticationApi.md#userapiauthenticatedeveloper) | **Get** /v1/auth/developer | Authenticate developer
 *AuthenticationApi* | [**UserAPIAuthenticateProject**](docs/AuthenticationApi.md#userapiauthenticateproject) | **Get** /v1/auth | Authenticate project
@@ -136,7 +137,19 @@ Class | Method | HTTP request | Description
  - [GetAddressRiskScore200Response](docs/GetAddressRiskScore200Response.md)
  - [GetTransactionRiskScore200Response](docs/GetTransactionRiskScore200Response.md)
  - [GetUser404Response](docs/GetUser404Response.md)
+ - [Metadata](docs/Metadata.md)
+ - [MetadataAttributesInner](docs/MetadataAttributesInner.md)
  - [Movement](docs/Movement.md)
+ - [NFTMetadata200ResponseValue](docs/NFTMetadata200ResponseValue.md)
+ - [NftContractMetadata](docs/NftContractMetadata.md)
+ - [NftId](docs/NftId.md)
+ - [NftIdTokenMetadata](docs/NftIdTokenMetadata.md)
+ - [NftMedia](docs/NftMedia.md)
+ - [NftSpamInfo](docs/NftSpamInfo.md)
+ - [NftTokenUri](docs/NftTokenUri.md)
+ - [OwnedNft](docs/OwnedNft.md)
+ - [OwnedNftContract](docs/OwnedNftContract.md)
+ - [OwnedNftMedia](docs/OwnedNftMedia.md)
  - [RiskReportCategory](docs/RiskReportCategory.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionRiskReport](docs/TransactionRiskReport.md)

@@ -158,6 +158,12 @@ func NewConfiguration() *Configuration {
 					Description: "Call",
 				},
 			},
+			"AggregatedInfoApiService.NFTMetadata": {
+				{
+					URL: "https://aisp-api.blockmate.io",
+					Description: "Call",
+				},
+			},
 			"AggregatedInfoApiService.Transactions": {
 				{
 					URL: "https://aisp-api.blockmate.io",
