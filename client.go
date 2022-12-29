@@ -55,7 +55,11 @@ type APIClient struct {
 
 	AggregatedInfoApi *AggregatedInfoApiService
 
+	AnalyticsApi *AnalyticsApiService
+
 	AuthenticationApi *AuthenticationApiService
+
+	ENSApi *ENSApiService
 
 	ExchangeRateInfoApi *ExchangeRateInfoApiService
 
@@ -83,7 +87,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountProviderInfoApi = (*AccountProviderInfoApiService)(&c.common)
 	c.AddressNameAndCategoryInfoApi = (*AddressNameAndCategoryInfoApiService)(&c.common)
 	c.AggregatedInfoApi = (*AggregatedInfoApiService)(&c.common)
+	c.AnalyticsApi = (*AnalyticsApiService)(&c.common)
 	c.AuthenticationApi = (*AuthenticationApiService)(&c.common)
+	c.ENSApi = (*ENSApiService)(&c.common)
 	c.ExchangeRateInfoApi = (*ExchangeRateInfoApiService)(&c.common)
 	c.RiskInfoApi = (*RiskInfoApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)

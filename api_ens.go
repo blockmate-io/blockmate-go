@@ -19,72 +19,65 @@ import (
 )
 
 
-// AddressNameAndCategoryInfoApiService AddressNameAndCategoryInfoApi service
-type AddressNameAndCategoryInfoApiService service
+// ENSApiService ENSApi service
+type ENSApiService service
 
-type ApiGetAddressNameInfoMultiRequest struct {
+type ApiGetAddressFromDomainRequest struct {
 	ctx context.Context
-	ApiService *AddressNameAndCategoryInfoApiService
-	chain *string
-	requestBody *[]string
+	ApiService *ENSApiService
+	domain *string
 }
 
-// Blockchain identifier
-func (r ApiGetAddressNameInfoMultiRequest) Chain(chain string) ApiGetAddressNameInfoMultiRequest {
-	r.chain = &chain
+// ENS domain for which Ethereum address should be returned
+func (r ApiGetAddressFromDomainRequest) Domain(domain string) ApiGetAddressFromDomainRequest {
+	r.domain = &domain
 	return r
 }
 
-// OK
-func (r ApiGetAddressNameInfoMultiRequest) RequestBody(requestBody []string) ApiGetAddressNameInfoMultiRequest {
-	r.requestBody = &requestBody
-	return r
-}
-
-func (r ApiGetAddressNameInfoMultiRequest) Execute() (*map[string]GetAddressNameInfoSingle200Response, *http.Response, error) {
-	return r.ApiService.GetAddressNameInfoMultiExecute(r)
+func (r ApiGetAddressFromDomainRequest) Execute() (*GetAddressFromDomain200Response, *http.Response, error) {
+	return r.ApiService.GetAddressFromDomainExecute(r)
 }
 
 /*
-GetAddressNameInfoMulti Get address name and category info for multiple addresses
+GetAddressFromDomain Get address for specified ENS domain
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAddressNameInfoMultiRequest
+ @return ApiGetAddressFromDomainRequest
 */
-func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoMulti(ctx context.Context) ApiGetAddressNameInfoMultiRequest {
-	return ApiGetAddressNameInfoMultiRequest{
+func (a *ENSApiService) GetAddressFromDomain(ctx context.Context) ApiGetAddressFromDomainRequest {
+	return ApiGetAddressFromDomainRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]GetAddressNameInfoSingle200Response
-func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoMultiExecute(r ApiGetAddressNameInfoMultiRequest) (*map[string]GetAddressNameInfoSingle200Response, *http.Response, error) {
+//  @return GetAddressFromDomain200Response
+func (a *ENSApiService) GetAddressFromDomainExecute(r ApiGetAddressFromDomainRequest) (*GetAddressFromDomain200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *map[string]GetAddressNameInfoSingle200Response
+		localVarReturnValue  *GetAddressFromDomain200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AddressNameAndCategoryInfoApiService.GetAddressNameInfoMulti")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ENSApiService.GetAddressFromDomain")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/addressname/multi"
+	localVarPath := localBasePath + "/v1/ens/addressFromDomain"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.chain == nil {
-		return localVarReturnValue, nil, reportError("chain is required and must be specified")
+	if r.domain == nil {
+		return localVarReturnValue, nil, reportError("domain is required and must be specified")
 	}
 
-	localVarQueryParams.Add("chain", parameterToString(*r.chain, ""))
+	localVarQueryParams.Add("domain", parameterToString(*r.domain, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -100,8 +93,6 @@ func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoMultiExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -158,58 +149,51 @@ func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoMultiExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetAddressNameInfoSingleRequest struct {
+type ApiGetDomainFromAddressRequest struct {
 	ctx context.Context
-	ApiService *AddressNameAndCategoryInfoApiService
+	ApiService *ENSApiService
 	address *string
-	chain *string
 }
 
-// Address for which name and category should be returned
-func (r ApiGetAddressNameInfoSingleRequest) Address(address string) ApiGetAddressNameInfoSingleRequest {
+// Ethereum address for which domain and metadata should be returned
+func (r ApiGetDomainFromAddressRequest) Address(address string) ApiGetDomainFromAddressRequest {
 	r.address = &address
 	return r
 }
 
-// Blockchain identifier
-func (r ApiGetAddressNameInfoSingleRequest) Chain(chain string) ApiGetAddressNameInfoSingleRequest {
-	r.chain = &chain
-	return r
-}
-
-func (r ApiGetAddressNameInfoSingleRequest) Execute() (*GetAddressNameInfoSingle200Response, *http.Response, error) {
-	return r.ApiService.GetAddressNameInfoSingleExecute(r)
+func (r ApiGetDomainFromAddressRequest) Execute() (*GetDomainFromAddress200Response, *http.Response, error) {
+	return r.ApiService.GetDomainFromAddressExecute(r)
 }
 
 /*
-GetAddressNameInfoSingle Get address name and category info for single address
+GetDomainFromAddress Get domain and metadata for specified ENS address
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAddressNameInfoSingleRequest
+ @return ApiGetDomainFromAddressRequest
 */
-func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoSingle(ctx context.Context) ApiGetAddressNameInfoSingleRequest {
-	return ApiGetAddressNameInfoSingleRequest{
+func (a *ENSApiService) GetDomainFromAddress(ctx context.Context) ApiGetDomainFromAddressRequest {
+	return ApiGetDomainFromAddressRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetAddressNameInfoSingle200Response
-func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoSingleExecute(r ApiGetAddressNameInfoSingleRequest) (*GetAddressNameInfoSingle200Response, *http.Response, error) {
+//  @return GetDomainFromAddress200Response
+func (a *ENSApiService) GetDomainFromAddressExecute(r ApiGetDomainFromAddressRequest) (*GetDomainFromAddress200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetAddressNameInfoSingle200Response
+		localVarReturnValue  *GetDomainFromAddress200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AddressNameAndCategoryInfoApiService.GetAddressNameInfoSingle")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ENSApiService.GetDomainFromAddress")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/addressname/simple"
+	localVarPath := localBasePath + "/v1/ens/domainFromAddress"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -217,12 +201,8 @@ func (a *AddressNameAndCategoryInfoApiService) GetAddressNameInfoSingleExecute(r
 	if r.address == nil {
 		return localVarReturnValue, nil, reportError("address is required and must be specified")
 	}
-	if r.chain == nil {
-		return localVarReturnValue, nil, reportError("chain is required and must be specified")
-	}
 
 	localVarQueryParams.Add("address", parameterToString(*r.address, ""))
-	localVarQueryParams.Add("chain", parameterToString(*r.chain, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

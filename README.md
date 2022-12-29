@@ -74,22 +74,26 @@ ctx = context.WithValue(context.Background(), blockmate.ContextOperationServerVa
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.blockmate.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountProviderInfoApi* | [**ConnectAccount**](docs/AccountProviderInfoApi.md#connectaccount) | **Post** /v1/{account_provider}/connect | Connect new account
 *AccountProviderInfoApi* | [**DeleteAccount**](docs/AccountProviderInfoApi.md#deleteaccount) | **Delete** /v1/{account_provider}/account/{account_id} | Delete account
 *AccountProviderInfoApi* | [**GetAccountHint**](docs/AccountProviderInfoApi.md#getaccounthint) | **Get** /v1/{account_provider}/connect | Get account hint
-*AddressNameAndCategoryInfoApi* | [**GetAddressNameInfo**](docs/AddressNameAndCategoryInfoApi.md#getaddressnameinfo) | **Get** /v1/addressname/simple | Get address name and category info
+*AddressNameAndCategoryInfoApi* | [**GetAddressNameInfoMulti**](docs/AddressNameAndCategoryInfoApi.md#getaddressnameinfomulti) | **Post** /v1/addressname/multi | Get address name and category info for multiple addresses
+*AddressNameAndCategoryInfoApi* | [**GetAddressNameInfoSingle**](docs/AddressNameAndCategoryInfoApi.md#getaddressnameinfosingle) | **Get** /v1/addressname/simple | Get address name and category info for single address
 *AggregatedInfoApi* | [**AccountProviderHintsList**](docs/AggregatedInfoApi.md#accountproviderhintslist) | **Get** /v1/aggregate/account_provider_hints | Get list of account providers hints
 *AggregatedInfoApi* | [**AccountProvidersList**](docs/AggregatedInfoApi.md#accountproviderslist) | **Get** /v1/aggregate/account_providers | Get list of account providers
 *AggregatedInfoApi* | [**Accounts**](docs/AggregatedInfoApi.md#accounts) | **Get** /v1/aggregate/accounts | List accounts
 *AggregatedInfoApi* | [**Balance**](docs/AggregatedInfoApi.md#balance) | **Get** /v1/aggregate/balance | Get balance
 *AggregatedInfoApi* | [**NFTMetadata**](docs/AggregatedInfoApi.md#nftmetadata) | **Get** /v1/aggregate/nft_metadata | Get NFT metadata
 *AggregatedInfoApi* | [**Transactions**](docs/AggregatedInfoApi.md#transactions) | **Get** /v1/aggregate/transactions | Get transactions
+*AnalyticsApi* | [**GetAnalytics**](docs/AnalyticsApi.md#getanalytics) | **Get** /v1/analytics/{account_provider}/account/{account_id}/stats | Get analytics focused on gaming
 *AuthenticationApi* | [**UserAPIAuthenticateDeveloper**](docs/AuthenticationApi.md#userapiauthenticatedeveloper) | **Get** /v1/auth/developer | Authenticate developer
 *AuthenticationApi* | [**UserAPIAuthenticateProject**](docs/AuthenticationApi.md#userapiauthenticateproject) | **Get** /v1/auth | Authenticate project
+*ENSApi* | [**GetAddressFromDomain**](docs/ENSApi.md#getaddressfromdomain) | **Get** /v1/ens/addressFromDomain | Get address for specified ENS domain
+*ENSApi* | [**GetDomainFromAddress**](docs/ENSApi.md#getdomainfromaddress) | **Get** /v1/ens/domainFromAddress | Get domain and metadata for specified ENS address
 *ExchangeRateInfoApi* | [**GetCurrentExchangeRate**](docs/ExchangeRateInfoApi.md#getcurrentexchangerate) | **Get** /v1/exchangerate/current | Get current exchange rate
 *ExchangeRateInfoApi* | [**GetHistoricalExchangeRate**](docs/ExchangeRateInfoApi.md#gethistoricalexchangerate) | **Get** /v1/exchangerate/history | Get historical exchange rate
 *RiskInfoApi* | [**GetAddressRiskScore**](docs/RiskInfoApi.md#getaddressriskscore) | **Get** /v1/risk/score | Get address risk score
@@ -133,8 +137,15 @@ Class | Method | HTTP request | Description
  - [GetAccountHint200ResponseFields](docs/GetAccountHint200ResponseFields.md)
  - [GetAccountHint403Response](docs/GetAccountHint403Response.md)
  - [GetAccountHint404Response](docs/GetAccountHint404Response.md)
- - [GetAddressNameInfo200Response](docs/GetAddressNameInfo200Response.md)
+ - [GetAddressFromDomain200Response](docs/GetAddressFromDomain200Response.md)
+ - [GetAddressNameInfoSingle200Response](docs/GetAddressNameInfoSingle200Response.md)
  - [GetAddressRiskScore200Response](docs/GetAddressRiskScore200Response.md)
+ - [GetAnalytics200Response](docs/GetAnalytics200Response.md)
+ - [GetAnalytics200ResponseValue](docs/GetAnalytics200ResponseValue.md)
+ - [GetDomainFromAddress200Response](docs/GetDomainFromAddress200Response.md)
+ - [GetDomainFromAddress200ResponseMetadata](docs/GetDomainFromAddress200ResponseMetadata.md)
+ - [GetDomainFromAddress200ResponseMetadataAttributesInner](docs/GetDomainFromAddress200ResponseMetadataAttributesInner.md)
+ - [GetDomainFromAddress200ResponseMetadataAttributesInnerValue](docs/GetDomainFromAddress200ResponseMetadataAttributesInnerValue.md)
  - [GetTransactionRiskScore200Response](docs/GetTransactionRiskScore200Response.md)
  - [GetUser404Response](docs/GetUser404Response.md)
  - [Metadata](docs/Metadata.md)
