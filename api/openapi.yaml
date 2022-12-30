@@ -1191,7 +1191,7 @@ paths:
   /v1/analytics/{account_provider}/account/{account_id}/stats:
     get:
       description: Get analytics focused on gaming. All empty values are omitted from
-        the response.
+        the response. Values are recalculated once per day.
       operationId: GetAnalytics
       parameters:
       - description: URL value from account_providers method
@@ -1219,6 +1219,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetAnalytics_200_response'
           description: OK
+        "204":
+          description: "No Content (happens when account is connected, but values\
+            \ were not recalculated yet)"
         "400":
           content:
             application/json:

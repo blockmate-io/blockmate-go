@@ -37,7 +37,7 @@ func (r ApiGetAnalyticsRequest) Execute() (*GetAnalytics200Response, *http.Respo
 /*
 GetAnalytics Get analytics focused on gaming
 
-Get analytics focused on gaming. All empty values are omitted from the response.
+Get analytics focused on gaming. All empty values are omitted from the response. Values are recalculated once per day.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountProvider URL value from account_providers method
