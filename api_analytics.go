@@ -23,29 +23,29 @@ import (
 // AnalyticsApiService AnalyticsApi service
 type AnalyticsApiService service
 
-type ApiGetAnalyticsRequest struct {
+type ApiGetAccountAnalyticsRequest struct {
 	ctx context.Context
 	ApiService *AnalyticsApiService
 	accountProvider string
 	accountId string
 }
 
-func (r ApiGetAnalyticsRequest) Execute() (*GetAnalytics200Response, *http.Response, error) {
-	return r.ApiService.GetAnalyticsExecute(r)
+func (r ApiGetAccountAnalyticsRequest) Execute() (*Analytics, *http.Response, error) {
+	return r.ApiService.GetAccountAnalyticsExecute(r)
 }
 
 /*
-GetAnalytics Get analytics focused on gaming
+GetAccountAnalytics Get analytics focused on gaming for specified account and provider
 
-Get analytics focused on gaming. All empty values are omitted from the response. Values are recalculated once per day.
+Get analytics focused on gaming for specified account and provider. All empty values are omitted from the response. Values are recalculated once per day.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountProvider URL value from account_providers method
  @param accountId Account ID
- @return ApiGetAnalyticsRequest
+ @return ApiGetAccountAnalyticsRequest
 */
-func (a *AnalyticsApiService) GetAnalytics(ctx context.Context, accountProvider string, accountId string) ApiGetAnalyticsRequest {
-	return ApiGetAnalyticsRequest{
+func (a *AnalyticsApiService) GetAccountAnalytics(ctx context.Context, accountProvider string, accountId string) ApiGetAccountAnalyticsRequest {
+	return ApiGetAccountAnalyticsRequest{
 		ApiService: a,
 		ctx: ctx,
 		accountProvider: accountProvider,
@@ -54,16 +54,16 @@ func (a *AnalyticsApiService) GetAnalytics(ctx context.Context, accountProvider 
 }
 
 // Execute executes the request
-//  @return GetAnalytics200Response
-func (a *AnalyticsApiService) GetAnalyticsExecute(r ApiGetAnalyticsRequest) (*GetAnalytics200Response, *http.Response, error) {
+//  @return Analytics
+func (a *AnalyticsApiService) GetAccountAnalyticsExecute(r ApiGetAccountAnalyticsRequest) (*Analytics, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetAnalytics200Response
+		localVarReturnValue  *Analytics
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetAnalytics")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetAccountAnalytics")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -71,6 +71,364 @@ func (a *AnalyticsApiService) GetAnalyticsExecute(r ApiGetAnalyticsRequest) (*Ge
 	localVarPath := localBasePath + "/v1/analytics/{account_provider}/account/{account_id}/stats"
 	localVarPath = strings.Replace(localVarPath, "{"+"account_provider"+"}", url.PathEscape(parameterToString(r.accountProvider, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"account_id"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UserAPIAuthenticateProject400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v UserAPIAuthenticateProject401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetProjectAnalyticsRequest struct {
+	ctx context.Context
+	ApiService *AnalyticsApiService
+}
+
+func (r ApiGetProjectAnalyticsRequest) Execute() (*map[string]Analytics, *http.Response, error) {
+	return r.ApiService.GetProjectAnalyticsExecute(r)
+}
+
+/*
+GetProjectAnalytics Get analytics focused on gaming for whole project
+
+Get analytics focused on gaming for whole project. All empty values are omitted from the response. Values are recalculated once per day.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetProjectAnalyticsRequest
+*/
+func (a *AnalyticsApiService) GetProjectAnalytics(ctx context.Context) ApiGetProjectAnalyticsRequest {
+	return ApiGetProjectAnalyticsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]Analytics
+func (a *AnalyticsApiService) GetProjectAnalyticsExecute(r ApiGetProjectAnalyticsRequest) (*map[string]Analytics, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *map[string]Analytics
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetProjectAnalytics")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/analytics/project/stats"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UserAPIAuthenticateProject400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v UserAPIAuthenticateProject401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetProviderAnalyticsRequest struct {
+	ctx context.Context
+	ApiService *AnalyticsApiService
+	accountProvider string
+}
+
+func (r ApiGetProviderAnalyticsRequest) Execute() (*map[string]Analytics, *http.Response, error) {
+	return r.ApiService.GetProviderAnalyticsExecute(r)
+}
+
+/*
+GetProviderAnalytics Get analytics focused on gaming for specified provider
+
+Get analytics focused on gaming for specified provider. All empty values are omitted from the response. Values are recalculated once per day.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountProvider URL value from account_providers method
+ @return ApiGetProviderAnalyticsRequest
+*/
+func (a *AnalyticsApiService) GetProviderAnalytics(ctx context.Context, accountProvider string) ApiGetProviderAnalyticsRequest {
+	return ApiGetProviderAnalyticsRequest{
+		ApiService: a,
+		ctx: ctx,
+		accountProvider: accountProvider,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]Analytics
+func (a *AnalyticsApiService) GetProviderAnalyticsExecute(r ApiGetProviderAnalyticsRequest) (*map[string]Analytics, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *map[string]Analytics
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetProviderAnalytics")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/analytics/{account_provider}/stats"
+	localVarPath = strings.Replace(localVarPath, "{"+"account_provider"+"}", url.PathEscape(parameterToString(r.accountProvider, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UserAPIAuthenticateProject400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v UserAPIAuthenticateProject401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserAnalyticsRequest struct {
+	ctx context.Context
+	ApiService *AnalyticsApiService
+}
+
+func (r ApiGetUserAnalyticsRequest) Execute() (*map[string]Analytics, *http.Response, error) {
+	return r.ApiService.GetUserAnalyticsExecute(r)
+}
+
+/*
+GetUserAnalytics Get analytics focused on gaming for this user
+
+Get analytics focused on gaming for this user. All empty values are omitted from the response. Values are recalculated once per day.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetUserAnalyticsRequest
+*/
+func (a *AnalyticsApiService) GetUserAnalytics(ctx context.Context) ApiGetUserAnalyticsRequest {
+	return ApiGetUserAnalyticsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]Analytics
+func (a *AnalyticsApiService) GetUserAnalyticsExecute(r ApiGetUserAnalyticsRequest) (*map[string]Analytics, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *map[string]Analytics
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetUserAnalytics")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/analytics/user/stats"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

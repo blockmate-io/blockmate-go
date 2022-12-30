@@ -89,7 +89,10 @@ Class | Method | HTTP request | Description
 *AggregatedInfoApi* | [**Balance**](docs/AggregatedInfoApi.md#balance) | **Get** /v1/aggregate/balance | Get balance
 *AggregatedInfoApi* | [**NFTMetadata**](docs/AggregatedInfoApi.md#nftmetadata) | **Get** /v1/aggregate/nft_metadata | Get NFT metadata
 *AggregatedInfoApi* | [**Transactions**](docs/AggregatedInfoApi.md#transactions) | **Get** /v1/aggregate/transactions | Get transactions
-*AnalyticsApi* | [**GetAnalytics**](docs/AnalyticsApi.md#getanalytics) | **Get** /v1/analytics/{account_provider}/account/{account_id}/stats | Get analytics focused on gaming
+*AnalyticsApi* | [**GetAccountAnalytics**](docs/AnalyticsApi.md#getaccountanalytics) | **Get** /v1/analytics/{account_provider}/account/{account_id}/stats | Get analytics focused on gaming for specified account and provider
+*AnalyticsApi* | [**GetProjectAnalytics**](docs/AnalyticsApi.md#getprojectanalytics) | **Get** /v1/analytics/project/stats | Get analytics focused on gaming for whole project
+*AnalyticsApi* | [**GetProviderAnalytics**](docs/AnalyticsApi.md#getprovideranalytics) | **Get** /v1/analytics/{account_provider}/stats | Get analytics focused on gaming for specified provider
+*AnalyticsApi* | [**GetUserAnalytics**](docs/AnalyticsApi.md#getuseranalytics) | **Get** /v1/analytics/user/stats | Get analytics focused on gaming for this user
 *AuthenticationApi* | [**UserAPIAuthenticateDeveloper**](docs/AuthenticationApi.md#userapiauthenticatedeveloper) | **Get** /v1/auth/developer | Authenticate developer
 *AuthenticationApi* | [**UserAPIAuthenticateProject**](docs/AuthenticationApi.md#userapiauthenticateproject) | **Get** /v1/auth | Authenticate project
 *ENSApi* | [**GetAddressFromDomain**](docs/ENSApi.md#getaddressfromdomain) | **Get** /v1/ens/addressFromDomain | Get address for specified ENS domain
@@ -119,6 +122,8 @@ Class | Method | HTTP request | Description
  - [AddressRiskReport](docs/AddressRiskReport.md)
  - [AddressRiskReportDetails](docs/AddressRiskReportDetails.md)
  - [Amount](docs/Amount.md)
+ - [Analytics](docs/Analytics.md)
+ - [Analytics1](docs/Analytics1.md)
  - [AuthUser200Response](docs/AuthUser200Response.md)
  - [Balance200Response](docs/Balance200Response.md)
  - [BalanceResponse](docs/BalanceResponse.md)
@@ -140,8 +145,6 @@ Class | Method | HTTP request | Description
  - [GetAddressFromDomain200Response](docs/GetAddressFromDomain200Response.md)
  - [GetAddressNameInfoSingle200Response](docs/GetAddressNameInfoSingle200Response.md)
  - [GetAddressRiskScore200Response](docs/GetAddressRiskScore200Response.md)
- - [GetAnalytics200Response](docs/GetAnalytics200Response.md)
- - [GetAnalytics200ResponseValue](docs/GetAnalytics200ResponseValue.md)
  - [GetDomainFromAddress200Response](docs/GetDomainFromAddress200Response.md)
  - [GetDomainFromAddress200ResponseMetadata](docs/GetDomainFromAddress200ResponseMetadata.md)
  - [GetDomainFromAddress200ResponseMetadataAttributesInner](docs/GetDomainFromAddress200ResponseMetadataAttributesInner.md)

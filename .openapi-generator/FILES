@@ -23,6 +23,8 @@ model_account_provider_hint_fields.go
 model_address_risk_report.go
 model_address_risk_report_details.go
 model_amount.go
+model_analytics.go
+model_analytics_1.go
 model_auth_user_200_response.go
 model_balance_200_response.go
 model_balance_response.go
@@ -44,8 +46,6 @@ model_get_account_hint_404_response.go
 model_get_address_from_domain_200_response.go
 model_get_address_name_info_single_200_response.go
 model_get_address_risk_score_200_response.go
-model_get_analytics_200_response.go
-model_get_analytics_200_response_value.go
 model_get_domain_from_address_200_response.go
 model_get_domain_from_address_200_response_metadata.go
 model_get_domain_from_address_200_response_metadata_attributes_inner.go

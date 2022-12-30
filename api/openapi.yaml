@@ -1188,11 +1188,124 @@ paths:
       summary: Get domain and metadata for specified ENS address
       tags:
       - ENS
+  /v1/analytics/project/stats:
+    get:
+      description: Get analytics focused on gaming for whole project. All empty values
+        are omitted from the response. Values are recalculated once per day.
+      operationId: GetProjectAnalytics
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/Analytics'
+                type: object
+          description: OK
+        "204":
+          description: "No Content (happens when at least one account is connected,\
+            \ but values were not recalculated yet)"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      summary: Get analytics focused on gaming for whole project
+      tags:
+      - Analytics
+  /v1/analytics/user/stats:
+    get:
+      description: Get analytics focused on gaming for this user. All empty values
+        are omitted from the response. Values are recalculated once per day.
+      operationId: GetUserAnalytics
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/Analytics'
+                type: object
+          description: OK
+        "204":
+          description: "No Content (happens when at least one account is connected,\
+            \ but values were not recalculated yet)"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      summary: Get analytics focused on gaming for this user
+      tags:
+      - Analytics
+  /v1/analytics/{account_provider}/stats:
+    get:
+      description: Get analytics focused on gaming for specified provider. All empty
+        values are omitted from the response. Values are recalculated once per day.
+      operationId: GetProviderAnalytics
+      parameters:
+      - description: URL value from account_providers method
+        explode: false
+        in: path
+        name: account_provider
+        required: true
+        schema:
+          example: onchain/btc
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/Analytics'
+                type: object
+          description: OK
+        "204":
+          description: "No Content (happens when at least one account is connected,\
+            \ but values were not recalculated yet)"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_400_response'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAPI_AuthenticateProject_401_response'
+          description: Unauthorized
+      security:
+      - UserJWT: []
+      summary: Get analytics focused on gaming for specified provider
+      tags:
+      - Analytics
   /v1/analytics/{account_provider}/account/{account_id}/stats:
     get:
-      description: Get analytics focused on gaming. All empty values are omitted from
-        the response. Values are recalculated once per day.
-      operationId: GetAnalytics
+      description: Get analytics focused on gaming for specified account and provider.
+        All empty values are omitted from the response. Values are recalculated once
+        per day.
+      operationId: GetAccountAnalytics
       parameters:
       - description: URL value from account_providers method
         explode: false
@@ -1217,7 +1330,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAnalytics_200_response'
+                $ref: '#/components/schemas/Analytics'
           description: OK
         "204":
           description: "No Content (happens when account is connected, but values\
@@ -1236,7 +1349,7 @@ paths:
           description: Unauthorized
       security:
       - UserJWT: []
-      summary: Get analytics focused on gaming
+      summary: Get analytics focused on gaming for specified account and provider
       tags:
       - Analytics
 components:
@@ -1745,6 +1858,434 @@ components:
       - date
       - rate
       title: ExchangeRate
+      type: object
+    Analytics:
+      additionalProperties:
+        $ref: '#/components/schemas/Analytics_1'
+      description: Analytics
+      example:
+        count_txs_all_forever_gambling: 1
+        count_txs_out_30_gaming: 1
+        count_txs_all_365_gaming: 1
+        count_txs_all_30_gambling: 1
+        count_txs_out_7_nft: 1
+        first_txs_out_onchain: 2021-10-10T11:11:16Z
+        last_txs_in_gaming: 2021-10-10T11:11:16Z
+        count_txs_all_30_nft: 1
+        count_txs_in_forever_gaming: 1
+        count_txs_in_31_60_nft: 1
+        count_txs_out_forever_gambling: 1
+        count_txs_all_forever_onchain: 1
+        count_txs_in_7_gaming: 1
+        first_txs_in_nft: 2021-10-10T11:11:16Z
+        last_txs_in_onchain: 2021-10-10T11:11:16Z
+        count_txs_all_31_60_gambling: 1
+        last_txs_in_nft: 2021-10-10T11:11:16Z
+        count_txs_in_31_60_gaming: 1
+        last_txs_in_gambling: 2021-10-10T11:11:16Z
+        first_txs_all_nft: 2021-10-10T11:11:16Z
+        count_txs_out_31_60_gaming: 1
+        count_txs_all_7_gambling: 1
+        count_txs_all_30_gaming: 1
+        first_txs_in_gaming: 2021-10-10T11:11:16Z
+        last_txs_all_gaming: 2021-10-10T11:11:16Z
+        count_txs_out_31_60_nft: 1
+        first_txs_out_gambling: 2021-10-10T11:11:16Z
+        count_txs_out_31_60_gambling: 1
+        count_txs_in_forever_onchain: 1
+        count_txs_all_365_onchain: 1
+        count_txs_out_forever_nft: 1
+        last_txs_out_gaming: 2021-10-10T11:11:16Z
+        last_txs_out_nft: 2021-10-10T11:11:16Z
+        count_txs_in_31_60_onchain: 1
+        count_txs_all_31_60_onchain: 1
+        count_txs_out_365_nft: 1
+        count_txs_out_forever_gaming: 1
+        count_txs_all_7_nft: 1
+        count_txs_all_31_60_nft: 1
+        count_txs_all_forever_nft: 1
+        count_txs_all_30_onchain: 1
+        count_txs_out_30_onchain: 1
+        count_txs_in_365_gaming: 1
+        last_txs_all_nft: 2021-10-10T11:11:16Z
+        count_txs_in_30_gaming: 1
+        count_txs_in_7_onchain: 1
+        count_txs_out_30_nft: 1
+        count_txs_all_7_gaming: 1
+        count_txs_all_365_nft: 1
+        last_txs_out_onchain: 2021-10-10T11:11:16Z
+        count_txs_out_30_gambling: 1
+        count_txs_all_forever_gaming: 1
+        last_txs_all_gambling: 2021-10-10T11:11:16Z
+        count_txs_out_7_gambling: 1
+        last_txs_all_onchain: 2021-10-10T11:11:16Z
+        count_txs_in_7_nft: 1
+        count_txs_in_365_onchain: 1
+        first_txs_in_gambling: 2021-10-10T11:11:16Z
+        count_txs_out_365_gambling: 1
+        count_txs_in_31_60_gambling: 1
+        first_txs_all_gambling: 2021-10-10T11:11:16Z
+        count_txs_out_31_60_onchain: 1
+        count_txs_in_forever_gambling: 1
+        count_txs_out_forever_onchain: 1
+        first_txs_out_gaming: 2021-10-10T11:11:16Z
+        count_txs_in_forever_nft: 1
+        count_txs_in_365_gambling: 1
+        count_txs_in_30_nft: 1
+        first_txs_all_gaming: 2021-10-10T11:11:16Z
+        count_txs_all_365_gambling: 1
+        count_txs_out_365_onchain: 1
+        count_txs_in_30_gambling: 1
+        first_txs_in_onchain: 2021-10-10T11:11:16Z
+        first_txs_out_nft: 2021-10-10T11:11:16Z
+        count_txs_all_31_60_gaming: 1
+        count_txs_out_365_gaming: 1
+        count_txs_out_7_gaming: 1
+        last_txs_out_gambling: 2021-10-10T11:11:16Z
+        count_txs_all_7_onchain: 1
+        count_txs_in_7_gambling: 1
+        count_txs_in_30_onchain: 1
+        count_txs_out_7_onchain: 1
+        count_txs_in_365_nft: 1
+        first_txs_all_onchain: 2021-10-10T11:11:16Z
+      properties:
+        count_txs_all_forever_onchain:
+          description: Transactions count
+          example: 1
+          type: integer
+        count_txs_all_forever_nft:
+          description: NFT transactions count
+          example: 1
+          type: integer
+        count_txs_all_forever_gaming:
+          description: Gaming transactions count
+          example: 1
+          type: integer
+        count_txs_all_forever_gambling:
+          description: Gambling transactions count
+          example: 1
+          type: integer
+        count_txs_all_365_onchain:
+          description: Transactions count during last year
+          example: 1
+          type: integer
+        count_txs_all_365_nft:
+          description: NFT transactions count during last year
+          example: 1
+          type: integer
+        count_txs_all_365_gaming:
+          description: Gaming transactions count during last year
+          example: 1
+          type: integer
+        count_txs_all_365_gambling:
+          description: Gambling transactions count during last year
+          example: 1
+          type: integer
+        count_txs_all_31_60_onchain:
+          description: Transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_all_31_60_nft:
+          description: NFT transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_all_31_60_gaming:
+          description: Gaming transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_all_31_60_gambling:
+          description: Gambling transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_all_30_onchain:
+          description: Transactions count during last month
+          example: 1
+          type: integer
+        count_txs_all_30_nft:
+          description: NFT transactions count during last month
+          example: 1
+          type: integer
+        count_txs_all_30_gaming:
+          description: Gaming transactions count during last month
+          example: 1
+          type: integer
+        count_txs_all_30_gambling:
+          description: Gambling transactions count during last month
+          example: 1
+          type: integer
+        count_txs_all_7_onchain:
+          description: Transactions count during last week
+          example: 1
+          type: integer
+        count_txs_all_7_nft:
+          description: NFT transactions count during last week
+          example: 1
+          type: integer
+        count_txs_all_7_gaming:
+          description: Gaming transactions count during last week
+          example: 1
+          type: integer
+        count_txs_all_7_gambling:
+          description: Gambling transactions count during last week
+          example: 1
+          type: integer
+        count_txs_in_forever_onchain:
+          description: IN transactions count
+          example: 1
+          type: integer
+        count_txs_in_forever_nft:
+          description: IN NFT transactions count
+          example: 1
+          type: integer
+        count_txs_in_forever_gaming:
+          description: IN gaming transactions count
+          example: 1
+          type: integer
+        count_txs_in_forever_gambling:
+          description: IN gambling transactions count
+          example: 1
+          type: integer
+        count_txs_in_365_onchain:
+          description: IN transactions count during last year
+          example: 1
+          type: integer
+        count_txs_in_365_nft:
+          description: IN NFT transactions count during last year
+          example: 1
+          type: integer
+        count_txs_in_365_gaming:
+          description: IN gaming transactions count during last year
+          example: 1
+          type: integer
+        count_txs_in_365_gambling:
+          description: IN gambling transactions count during last year
+          example: 1
+          type: integer
+        count_txs_in_31_60_onchain:
+          description: IN transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_in_31_60_nft:
+          description: IN NFT transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_in_31_60_gaming:
+          description: IN gaming transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_in_31_60_gambling:
+          description: IN gambling transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_in_30_onchain:
+          description: IN transactions count during last month
+          example: 1
+          type: integer
+        count_txs_in_30_nft:
+          description: IN NFT transactions count during last month
+          example: 1
+          type: integer
+        count_txs_in_30_gaming:
+          description: IN gaming transactions count during last month
+          example: 1
+          type: integer
+        count_txs_in_30_gambling:
+          description: IN gambling transactions count during last month
+          example: 1
+          type: integer
+        count_txs_in_7_onchain:
+          description: IN transactions count during last week
+          example: 1
+          type: integer
+        count_txs_in_7_nft:
+          description: IN NFT transactions count during last week
+          example: 1
+          type: integer
+        count_txs_in_7_gaming:
+          description: IN gaming transactions count during last week
+          example: 1
+          type: integer
+        count_txs_in_7_gambling:
+          description: IN gambling transactions count during last week
+          example: 1
+          type: integer
+        count_txs_out_forever_onchain:
+          description: OUT transactions count
+          example: 1
+          type: integer
+        count_txs_out_forever_nft:
+          description: OUT NFT transactions count
+          example: 1
+          type: integer
+        count_txs_out_forever_gaming:
+          description: OUT gaming transactions count
+          example: 1
+          type: integer
+        count_txs_out_forever_gambling:
+          description: OUT gambling transactions count
+          example: 1
+          type: integer
+        count_txs_out_365_onchain:
+          description: OUT transactions count during last year
+          example: 1
+          type: integer
+        count_txs_out_365_nft:
+          description: OUT NFT transactions count during last year
+          example: 1
+          type: integer
+        count_txs_out_365_gaming:
+          description: OUT gaming transactions count during last year
+          example: 1
+          type: integer
+        count_txs_out_365_gambling:
+          description: OUT gambling transactions count during last year
+          example: 1
+          type: integer
+        count_txs_out_31_60_onchain:
+          description: OUT transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_out_31_60_nft:
+          description: OUT NFT transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_out_31_60_gaming:
+          description: OUT gaming transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_out_31_60_gambling:
+          description: OUT gambling transactions count during previous month
+          example: 1
+          type: integer
+        count_txs_out_30_onchain:
+          description: OUT transactions count during last month
+          example: 1
+          type: integer
+        count_txs_out_30_nft:
+          description: OUT NFT transactions count during last month
+          example: 1
+          type: integer
+        count_txs_out_30_gaming:
+          description: OUT gaming transactions count during last month
+          example: 1
+          type: integer
+        count_txs_out_30_gambling:
+          description: OUT gambling transactions count during last month
+          example: 1
+          type: integer
+        count_txs_out_7_onchain:
+          description: OUT transactions count during last week
+          example: 1
+          type: integer
+        count_txs_out_7_nft:
+          description: OUT NFT transactions count during last week
+          example: 1
+          type: integer
+        count_txs_out_7_gaming:
+          description: OUT gaming transactions count during last week
+          example: 1
+          type: integer
+        count_txs_out_7_gambling:
+          description: OUT gambling transactions count during last week
+          example: 1
+          type: integer
+        first_txs_all_onchain:
+          description: Time when first transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_all_nft:
+          description: Time when first NFT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_all_gaming:
+          description: Time when first gaming transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_all_gambling:
+          description: Time when first gambling transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_in_onchain:
+          description: Time when first IN transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_in_nft:
+          description: Time when first IN NFT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_in_gaming:
+          description: Time when first IN gaming transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_in_gambling:
+          description: Time when first IN gambling transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_out_onchain:
+          description: Time when first OUT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_out_nft:
+          description: Time when first OUT NFT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_out_gaming:
+          description: Time when first OUT gaming transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        first_txs_out_gambling:
+          description: Time when first OUT gambling transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_all_onchain:
+          description: Time when last transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_all_nft:
+          description: Time when last NFT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_all_gaming:
+          description: Time when last gaming transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_all_gambling:
+          description: Time when last gambling transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_in_onchain:
+          description: Time when last IN transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_in_nft:
+          description: Time when last IN NFT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_in_gaming:
+          description: Time when last IN gaming transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_in_gambling:
+          description: Time when last IN gambling transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_out_onchain:
+          description: Time when last OUT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_out_nft:
+          description: Time when last OUT NFT transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_out_gaming:
+          description: Time when last OUT gaming transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+        last_txs_out_gambling:
+          description: Time when last OUT gambling transaction occurred
+          example: 2021-10-10T11:11:16Z
+          type: string
+      title: Analytics
       type: object
     UserAPI_AuthenticateProject_200_response:
       example:
@@ -2697,7 +3238,104 @@ components:
         metadata:
           $ref: '#/components/schemas/GetDomainFromAddress_200_response_metadata'
       type: object
-    GetAnalytics_200_response_value:
+    AccountProviderHint_fields:
+      additionalProperties:
+        type: string
+      example:
+        wallet: Address
+        api_key: API Key
+        api_passphrase: API Passphrase
+        description: Account description
+        api_secret: API Secret
+      properties:
+        api_key:
+          example: API Key
+          type: string
+        api_secret:
+          example: API Secret
+          type: string
+        api_passphrase:
+          example: API Passphrase
+          type: string
+        description:
+          example: Account description
+          type: string
+        wallet:
+          example: Address
+          type: string
+      type: object
+    OwnedNft_contract:
+      description: Object - Contract for returned NFT
+      properties:
+        address:
+          description: String - Address of NFT contract.
+          type: string
+      type: object
+    OwnedNft_media:
+      properties:
+        raw:
+          description: String - Uri representing the location of the NFT's original
+            metadata blob. This is a backup for you to parse when the metadata field
+            is not automatically populated.
+          type: string
+        gateway:
+          description: String - Public gateway uri for the raw uri above.
+          type: string
+        thumbnail:
+          description: URL for a resized thumbnail of the NFT media asset.
+          type: string
+        format:
+          description: "The media format (jpg, gif, png, etc.) of the gateway and\
+            \ thumbnail assets."
+          type: string
+        bytes:
+          description: The size of the media asset in bytes.
+          type: integer
+      type: object
+    NftId_tokenMetadata:
+      properties:
+        tokenType:
+          description: String - 'ERC721' or 'ERC1155'
+          type: string
+      type: object
+    metadata_attributes_inner:
+      properties:
+        value:
+          type: string
+        trait_type:
+          type: string
+      type: object
+    AddressRiskReport_details:
+      example:
+        own_categories:
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+        source_of_funds_categories:
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+        - category_name: some-category-name
+          name: some-name
+          adress: 0xc50e6db1637423819edbccb20b15654338d65501
+          risk: 85
+      properties:
+        own_categories:
+          items:
+            $ref: '#/components/schemas/RiskReportCategory'
+          type: array
+        source_of_funds_categories:
+          items:
+            $ref: '#/components/schemas/RiskReportCategory'
+          type: array
+      type: object
+    Analytics_1:
       properties:
         sum_txs_all_forever_onchain:
           description: Sum of all transactions
@@ -3019,529 +3657,6 @@ components:
           description: Maximum gambling balance during last week
           example: 5.0
           type: number
-      type: object
-    GetAnalytics_200_response:
-      additionalProperties:
-        $ref: '#/components/schemas/GetAnalytics_200_response_value'
-      example:
-        count_txs_all_forever_gambling: 1
-        count_txs_out_30_gaming: 1
-        count_txs_all_365_gaming: 1
-        count_txs_all_30_gambling: 1
-        count_txs_out_7_nft: 1
-        first_txs_out_onchain: 2021-10-10T11:11:16Z
-        last_txs_in_gaming: 2021-10-10T11:11:16Z
-        count_txs_all_30_nft: 1
-        count_txs_in_forever_gaming: 1
-        count_txs_in_31_60_nft: 1
-        count_txs_out_forever_gambling: 1
-        count_txs_all_forever_onchain: 1
-        count_txs_in_7_gaming: 1
-        first_txs_in_nft: 2021-10-10T11:11:16Z
-        last_txs_in_onchain: 2021-10-10T11:11:16Z
-        count_txs_all_31_60_gambling: 1
-        last_txs_in_nft: 2021-10-10T11:11:16Z
-        count_txs_in_31_60_gaming: 1
-        last_txs_in_gambling: 2021-10-10T11:11:16Z
-        first_txs_all_nft: 2021-10-10T11:11:16Z
-        count_txs_out_31_60_gaming: 1
-        count_txs_all_7_gambling: 1
-        count_txs_all_30_gaming: 1
-        first_txs_in_gaming: 2021-10-10T11:11:16Z
-        last_txs_all_gaming: 2021-10-10T11:11:16Z
-        count_txs_out_31_60_nft: 1
-        first_txs_out_gambling: 2021-10-10T11:11:16Z
-        count_txs_out_31_60_gambling: 1
-        count_txs_in_forever_onchain: 1
-        count_txs_all_365_onchain: 1
-        count_txs_out_forever_nft: 1
-        last_txs_out_gaming: 2021-10-10T11:11:16Z
-        last_txs_out_nft: 2021-10-10T11:11:16Z
-        count_txs_in_31_60_onchain: 1
-        count_txs_all_31_60_onchain: 1
-        count_txs_out_365_nft: 1
-        count_txs_out_forever_gaming: 1
-        count_txs_all_7_nft: 1
-        count_txs_all_31_60_nft: 1
-        count_txs_all_forever_nft: 1
-        count_txs_all_30_onchain: 1
-        count_txs_out_30_onchain: 1
-        count_txs_in_365_gaming: 1
-        last_txs_all_nft: 2021-10-10T11:11:16Z
-        count_txs_in_30_gaming: 1
-        count_txs_in_7_onchain: 1
-        count_txs_out_30_nft: 1
-        count_txs_all_7_gaming: 1
-        count_txs_all_365_nft: 1
-        last_txs_out_onchain: 2021-10-10T11:11:16Z
-        count_txs_out_30_gambling: 1
-        count_txs_all_forever_gaming: 1
-        last_txs_all_gambling: 2021-10-10T11:11:16Z
-        count_txs_out_7_gambling: 1
-        last_txs_all_onchain: 2021-10-10T11:11:16Z
-        count_txs_in_7_nft: 1
-        count_txs_in_365_onchain: 1
-        first_txs_in_gambling: 2021-10-10T11:11:16Z
-        count_txs_out_365_gambling: 1
-        count_txs_in_31_60_gambling: 1
-        first_txs_all_gambling: 2021-10-10T11:11:16Z
-        count_txs_out_31_60_onchain: 1
-        count_txs_in_forever_gambling: 1
-        count_txs_out_forever_onchain: 1
-        first_txs_out_gaming: 2021-10-10T11:11:16Z
-        count_txs_in_forever_nft: 1
-        count_txs_in_365_gambling: 1
-        count_txs_in_30_nft: 1
-        first_txs_all_gaming: 2021-10-10T11:11:16Z
-        count_txs_all_365_gambling: 1
-        count_txs_out_365_onchain: 1
-        count_txs_in_30_gambling: 1
-        first_txs_in_onchain: 2021-10-10T11:11:16Z
-        first_txs_out_nft: 2021-10-10T11:11:16Z
-        count_txs_all_31_60_gaming: 1
-        count_txs_out_365_gaming: 1
-        count_txs_out_7_gaming: 1
-        last_txs_out_gambling: 2021-10-10T11:11:16Z
-        count_txs_all_7_onchain: 1
-        count_txs_in_7_gambling: 1
-        count_txs_in_30_onchain: 1
-        count_txs_out_7_onchain: 1
-        count_txs_in_365_nft: 1
-        first_txs_all_onchain: 2021-10-10T11:11:16Z
-      properties:
-        count_txs_all_forever_onchain:
-          description: Transactions count
-          example: 1
-          type: integer
-        count_txs_all_forever_nft:
-          description: NFT transactions count
-          example: 1
-          type: integer
-        count_txs_all_forever_gaming:
-          description: Gaming transactions count
-          example: 1
-          type: integer
-        count_txs_all_forever_gambling:
-          description: Gambling transactions count
-          example: 1
-          type: integer
-        count_txs_all_365_onchain:
-          description: Transactions count during last year
-          example: 1
-          type: integer
-        count_txs_all_365_nft:
-          description: NFT transactions count during last year
-          example: 1
-          type: integer
-        count_txs_all_365_gaming:
-          description: Gaming transactions count during last year
-          example: 1
-          type: integer
-        count_txs_all_365_gambling:
-          description: Gambling transactions count during last year
-          example: 1
-          type: integer
-        count_txs_all_31_60_onchain:
-          description: Transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_all_31_60_nft:
-          description: NFT transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_all_31_60_gaming:
-          description: Gaming transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_all_31_60_gambling:
-          description: Gambling transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_all_30_onchain:
-          description: Transactions count during last month
-          example: 1
-          type: integer
-        count_txs_all_30_nft:
-          description: NFT transactions count during last month
-          example: 1
-          type: integer
-        count_txs_all_30_gaming:
-          description: Gaming transactions count during last month
-          example: 1
-          type: integer
-        count_txs_all_30_gambling:
-          description: Gambling transactions count during last month
-          example: 1
-          type: integer
-        count_txs_all_7_onchain:
-          description: Transactions count during last week
-          example: 1
-          type: integer
-        count_txs_all_7_nft:
-          description: NFT transactions count during last week
-          example: 1
-          type: integer
-        count_txs_all_7_gaming:
-          description: Gaming transactions count during last week
-          example: 1
-          type: integer
-        count_txs_all_7_gambling:
-          description: Gambling transactions count during last week
-          example: 1
-          type: integer
-        count_txs_in_forever_onchain:
-          description: IN transactions count
-          example: 1
-          type: integer
-        count_txs_in_forever_nft:
-          description: IN NFT transactions count
-          example: 1
-          type: integer
-        count_txs_in_forever_gaming:
-          description: IN gaming transactions count
-          example: 1
-          type: integer
-        count_txs_in_forever_gambling:
-          description: IN gambling transactions count
-          example: 1
-          type: integer
-        count_txs_in_365_onchain:
-          description: IN transactions count during last year
-          example: 1
-          type: integer
-        count_txs_in_365_nft:
-          description: IN NFT transactions count during last year
-          example: 1
-          type: integer
-        count_txs_in_365_gaming:
-          description: IN gaming transactions count during last year
-          example: 1
-          type: integer
-        count_txs_in_365_gambling:
-          description: IN gambling transactions count during last year
-          example: 1
-          type: integer
-        count_txs_in_31_60_onchain:
-          description: IN transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_in_31_60_nft:
-          description: IN NFT transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_in_31_60_gaming:
-          description: IN gaming transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_in_31_60_gambling:
-          description: IN gambling transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_in_30_onchain:
-          description: IN transactions count during last month
-          example: 1
-          type: integer
-        count_txs_in_30_nft:
-          description: IN NFT transactions count during last month
-          example: 1
-          type: integer
-        count_txs_in_30_gaming:
-          description: IN gaming transactions count during last month
-          example: 1
-          type: integer
-        count_txs_in_30_gambling:
-          description: IN gambling transactions count during last month
-          example: 1
-          type: integer
-        count_txs_in_7_onchain:
-          description: IN transactions count during last week
-          example: 1
-          type: integer
-        count_txs_in_7_nft:
-          description: IN NFT transactions count during last week
-          example: 1
-          type: integer
-        count_txs_in_7_gaming:
-          description: IN gaming transactions count during last week
-          example: 1
-          type: integer
-        count_txs_in_7_gambling:
-          description: IN gambling transactions count during last week
-          example: 1
-          type: integer
-        count_txs_out_forever_onchain:
-          description: OUT transactions count
-          example: 1
-          type: integer
-        count_txs_out_forever_nft:
-          description: OUT NFT transactions count
-          example: 1
-          type: integer
-        count_txs_out_forever_gaming:
-          description: OUT gaming transactions count
-          example: 1
-          type: integer
-        count_txs_out_forever_gambling:
-          description: OUT gambling transactions count
-          example: 1
-          type: integer
-        count_txs_out_365_onchain:
-          description: OUT transactions count during last year
-          example: 1
-          type: integer
-        count_txs_out_365_nft:
-          description: OUT NFT transactions count during last year
-          example: 1
-          type: integer
-        count_txs_out_365_gaming:
-          description: OUT gaming transactions count during last year
-          example: 1
-          type: integer
-        count_txs_out_365_gambling:
-          description: OUT gambling transactions count during last year
-          example: 1
-          type: integer
-        count_txs_out_31_60_onchain:
-          description: OUT transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_out_31_60_nft:
-          description: OUT NFT transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_out_31_60_gaming:
-          description: OUT gaming transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_out_31_60_gambling:
-          description: OUT gambling transactions count during previous month
-          example: 1
-          type: integer
-        count_txs_out_30_onchain:
-          description: OUT transactions count during last month
-          example: 1
-          type: integer
-        count_txs_out_30_nft:
-          description: OUT NFT transactions count during last month
-          example: 1
-          type: integer
-        count_txs_out_30_gaming:
-          description: OUT gaming transactions count during last month
-          example: 1
-          type: integer
-        count_txs_out_30_gambling:
-          description: OUT gambling transactions count during last month
-          example: 1
-          type: integer
-        count_txs_out_7_onchain:
-          description: OUT transactions count during last week
-          example: 1
-          type: integer
-        count_txs_out_7_nft:
-          description: OUT NFT transactions count during last week
-          example: 1
-          type: integer
-        count_txs_out_7_gaming:
-          description: OUT gaming transactions count during last week
-          example: 1
-          type: integer
-        count_txs_out_7_gambling:
-          description: OUT gambling transactions count during last week
-          example: 1
-          type: integer
-        first_txs_all_onchain:
-          description: Time when first transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_all_nft:
-          description: Time when first NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_all_gaming:
-          description: Time when first gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_all_gambling:
-          description: Time when first gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_in_onchain:
-          description: Time when first IN transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_in_nft:
-          description: Time when first IN NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_in_gaming:
-          description: Time when first IN gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_in_gambling:
-          description: Time when first IN gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_out_onchain:
-          description: Time when first OUT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_out_nft:
-          description: Time when first OUT NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_out_gaming:
-          description: Time when first OUT gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        first_txs_out_gambling:
-          description: Time when first OUT gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_all_onchain:
-          description: Time when last transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_all_nft:
-          description: Time when last NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_all_gaming:
-          description: Time when last gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_all_gambling:
-          description: Time when last gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_in_onchain:
-          description: Time when last IN transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_in_nft:
-          description: Time when last IN NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_in_gaming:
-          description: Time when last IN gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_in_gambling:
-          description: Time when last IN gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_out_onchain:
-          description: Time when last OUT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_out_nft:
-          description: Time when last OUT NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_out_gaming:
-          description: Time when last OUT gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-        last_txs_out_gambling:
-          description: Time when last OUT gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
-      type: object
-    AccountProviderHint_fields:
-      additionalProperties:
-        type: string
-      example:
-        wallet: Address
-        api_key: API Key
-        api_passphrase: API Passphrase
-        description: Account description
-        api_secret: API Secret
-      properties:
-        api_key:
-          example: API Key
-          type: string
-        api_secret:
-          example: API Secret
-          type: string
-        api_passphrase:
-          example: API Passphrase
-          type: string
-        description:
-          example: Account description
-          type: string
-        wallet:
-          example: Address
-          type: string
-      type: object
-    OwnedNft_contract:
-      description: Object - Contract for returned NFT
-      properties:
-        address:
-          description: String - Address of NFT contract.
-          type: string
-      type: object
-    OwnedNft_media:
-      properties:
-        raw:
-          description: String - Uri representing the location of the NFT's original
-            metadata blob. This is a backup for you to parse when the metadata field
-            is not automatically populated.
-          type: string
-        gateway:
-          description: String - Public gateway uri for the raw uri above.
-          type: string
-        thumbnail:
-          description: URL for a resized thumbnail of the NFT media asset.
-          type: string
-        format:
-          description: "The media format (jpg, gif, png, etc.) of the gateway and\
-            \ thumbnail assets."
-          type: string
-        bytes:
-          description: The size of the media asset in bytes.
-          type: integer
-      type: object
-    NftId_tokenMetadata:
-      properties:
-        tokenType:
-          description: String - 'ERC721' or 'ERC1155'
-          type: string
-      type: object
-    metadata_attributes_inner:
-      properties:
-        value:
-          type: string
-        trait_type:
-          type: string
-      type: object
-    AddressRiskReport_details:
-      example:
-        own_categories:
-        - category_name: some-category-name
-          name: some-name
-          adress: 0xc50e6db1637423819edbccb20b15654338d65501
-          risk: 85
-        - category_name: some-category-name
-          name: some-name
-          adress: 0xc50e6db1637423819edbccb20b15654338d65501
-          risk: 85
-        source_of_funds_categories:
-        - category_name: some-category-name
-          name: some-name
-          adress: 0xc50e6db1637423819edbccb20b15654338d65501
-          risk: 85
-        - category_name: some-category-name
-          name: some-name
-          adress: 0xc50e6db1637423819edbccb20b15654338d65501
-          risk: 85
-      properties:
-        own_categories:
-          items:
-            $ref: '#/components/schemas/RiskReportCategory'
-          type: array
-        source_of_funds_categories:
-          items:
-            $ref: '#/components/schemas/RiskReportCategory'
-          type: array
       type: object
   securitySchemes:
     UserJWT:
