@@ -14,31 +14,31 @@ import (
 	"encoding/json"
 )
 
-// GetAddressNameInfoSingle200Response struct for GetAddressNameInfoSingle200Response
-type GetAddressNameInfoSingle200Response struct {
+// GetAddressNameInfoMulti200ResponseValue struct for GetAddressNameInfoMulti200ResponseValue
+type GetAddressNameInfoMulti200ResponseValue struct {
 	Name *string `json:"name,omitempty"`
 	Category *string `json:"category,omitempty"`
 }
 
-// NewGetAddressNameInfoSingle200Response instantiates a new GetAddressNameInfoSingle200Response object
+// NewGetAddressNameInfoMulti200ResponseValue instantiates a new GetAddressNameInfoMulti200ResponseValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAddressNameInfoSingle200Response() *GetAddressNameInfoSingle200Response {
-	this := GetAddressNameInfoSingle200Response{}
+func NewGetAddressNameInfoMulti200ResponseValue() *GetAddressNameInfoMulti200ResponseValue {
+	this := GetAddressNameInfoMulti200ResponseValue{}
 	return &this
 }
 
-// NewGetAddressNameInfoSingle200ResponseWithDefaults instantiates a new GetAddressNameInfoSingle200Response object
+// NewGetAddressNameInfoMulti200ResponseValueWithDefaults instantiates a new GetAddressNameInfoMulti200ResponseValue object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetAddressNameInfoSingle200ResponseWithDefaults() *GetAddressNameInfoSingle200Response {
-	this := GetAddressNameInfoSingle200Response{}
+func NewGetAddressNameInfoMulti200ResponseValueWithDefaults() *GetAddressNameInfoMulti200ResponseValue {
+	this := GetAddressNameInfoMulti200ResponseValue{}
 	return &this
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *GetAddressNameInfoSingle200Response) GetName() string {
+func (o *GetAddressNameInfoMulti200ResponseValue) GetName() string {
 	if o == nil || o.Name == nil {
 		var ret string
 		return ret
@@ -48,7 +48,7 @@ func (o *GetAddressNameInfoSingle200Response) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAddressNameInfoSingle200Response) GetNameOk() (*string, bool) {
+func (o *GetAddressNameInfoMulti200ResponseValue) GetNameOk() (*string, bool) {
 	if o == nil || o.Name == nil {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *GetAddressNameInfoSingle200Response) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *GetAddressNameInfoSingle200Response) HasName() bool {
+func (o *GetAddressNameInfoMulti200ResponseValue) HasName() bool {
 	if o != nil && o.Name != nil {
 		return true
 	}
@@ -65,12 +65,12 @@ func (o *GetAddressNameInfoSingle200Response) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *GetAddressNameInfoSingle200Response) SetName(v string) {
+func (o *GetAddressNameInfoMulti200ResponseValue) SetName(v string) {
 	o.Name = &v
 }
 
 // GetCategory returns the Category field value if set, zero value otherwise.
-func (o *GetAddressNameInfoSingle200Response) GetCategory() string {
+func (o *GetAddressNameInfoMulti200ResponseValue) GetCategory() string {
 	if o == nil || o.Category == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *GetAddressNameInfoSingle200Response) GetCategory() string {
 
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAddressNameInfoSingle200Response) GetCategoryOk() (*string, bool) {
+func (o *GetAddressNameInfoMulti200ResponseValue) GetCategoryOk() (*string, bool) {
 	if o == nil || o.Category == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *GetAddressNameInfoSingle200Response) GetCategoryOk() (*string, bool) {
 }
 
 // HasCategory returns a boolean if a field has been set.
-func (o *GetAddressNameInfoSingle200Response) HasCategory() bool {
+func (o *GetAddressNameInfoMulti200ResponseValue) HasCategory() bool {
 	if o != nil && o.Category != nil {
 		return true
 	}
@@ -97,11 +97,11 @@ func (o *GetAddressNameInfoSingle200Response) HasCategory() bool {
 }
 
 // SetCategory gets a reference to the given string and assigns it to the Category field.
-func (o *GetAddressNameInfoSingle200Response) SetCategory(v string) {
+func (o *GetAddressNameInfoMulti200ResponseValue) SetCategory(v string) {
 	o.Category = &v
 }
 
-func (o GetAddressNameInfoSingle200Response) MarshalJSON() ([]byte, error) {
+func (o GetAddressNameInfoMulti200ResponseValue) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -112,38 +112,38 @@ func (o GetAddressNameInfoSingle200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableGetAddressNameInfoSingle200Response struct {
-	value *GetAddressNameInfoSingle200Response
+type NullableGetAddressNameInfoMulti200ResponseValue struct {
+	value *GetAddressNameInfoMulti200ResponseValue
 	isSet bool
 }
 
-func (v NullableGetAddressNameInfoSingle200Response) Get() *GetAddressNameInfoSingle200Response {
+func (v NullableGetAddressNameInfoMulti200ResponseValue) Get() *GetAddressNameInfoMulti200ResponseValue {
 	return v.value
 }
 
-func (v *NullableGetAddressNameInfoSingle200Response) Set(val *GetAddressNameInfoSingle200Response) {
+func (v *NullableGetAddressNameInfoMulti200ResponseValue) Set(val *GetAddressNameInfoMulti200ResponseValue) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetAddressNameInfoSingle200Response) IsSet() bool {
+func (v NullableGetAddressNameInfoMulti200ResponseValue) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetAddressNameInfoSingle200Response) Unset() {
+func (v *NullableGetAddressNameInfoMulti200ResponseValue) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetAddressNameInfoSingle200Response(val *GetAddressNameInfoSingle200Response) *NullableGetAddressNameInfoSingle200Response {
-	return &NullableGetAddressNameInfoSingle200Response{value: val, isSet: true}
+func NewNullableGetAddressNameInfoMulti200ResponseValue(val *GetAddressNameInfoMulti200ResponseValue) *NullableGetAddressNameInfoMulti200ResponseValue {
+	return &NullableGetAddressNameInfoMulti200ResponseValue{value: val, isSet: true}
 }
 
-func (v NullableGetAddressNameInfoSingle200Response) MarshalJSON() ([]byte, error) {
+func (v NullableGetAddressNameInfoMulti200ResponseValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetAddressNameInfoSingle200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableGetAddressNameInfoMulti200ResponseValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

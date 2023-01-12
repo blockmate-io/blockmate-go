@@ -14,31 +14,31 @@ import (
 	"encoding/json"
 )
 
-// AddressRiskReportDetails struct for AddressRiskReportDetails
-type AddressRiskReportDetails struct {
+// TransactionRiskReportDetailsValue struct for TransactionRiskReportDetailsValue
+type TransactionRiskReportDetailsValue struct {
 	OwnCategories []RiskReportCategory `json:"own_categories,omitempty"`
 	SourceOfFundsCategories []RiskReportCategory `json:"source_of_funds_categories,omitempty"`
 }
 
-// NewAddressRiskReportDetails instantiates a new AddressRiskReportDetails object
+// NewTransactionRiskReportDetailsValue instantiates a new TransactionRiskReportDetailsValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddressRiskReportDetails() *AddressRiskReportDetails {
-	this := AddressRiskReportDetails{}
+func NewTransactionRiskReportDetailsValue() *TransactionRiskReportDetailsValue {
+	this := TransactionRiskReportDetailsValue{}
 	return &this
 }
 
-// NewAddressRiskReportDetailsWithDefaults instantiates a new AddressRiskReportDetails object
+// NewTransactionRiskReportDetailsValueWithDefaults instantiates a new TransactionRiskReportDetailsValue object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAddressRiskReportDetailsWithDefaults() *AddressRiskReportDetails {
-	this := AddressRiskReportDetails{}
+func NewTransactionRiskReportDetailsValueWithDefaults() *TransactionRiskReportDetailsValue {
+	this := TransactionRiskReportDetailsValue{}
 	return &this
 }
 
 // GetOwnCategories returns the OwnCategories field value if set, zero value otherwise.
-func (o *AddressRiskReportDetails) GetOwnCategories() []RiskReportCategory {
+func (o *TransactionRiskReportDetailsValue) GetOwnCategories() []RiskReportCategory {
 	if o == nil || o.OwnCategories == nil {
 		var ret []RiskReportCategory
 		return ret
@@ -48,7 +48,7 @@ func (o *AddressRiskReportDetails) GetOwnCategories() []RiskReportCategory {
 
 // GetOwnCategoriesOk returns a tuple with the OwnCategories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AddressRiskReportDetails) GetOwnCategoriesOk() ([]RiskReportCategory, bool) {
+func (o *TransactionRiskReportDetailsValue) GetOwnCategoriesOk() ([]RiskReportCategory, bool) {
 	if o == nil || o.OwnCategories == nil {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *AddressRiskReportDetails) GetOwnCategoriesOk() ([]RiskReportCategory, b
 }
 
 // HasOwnCategories returns a boolean if a field has been set.
-func (o *AddressRiskReportDetails) HasOwnCategories() bool {
+func (o *TransactionRiskReportDetailsValue) HasOwnCategories() bool {
 	if o != nil && o.OwnCategories != nil {
 		return true
 	}
@@ -65,12 +65,12 @@ func (o *AddressRiskReportDetails) HasOwnCategories() bool {
 }
 
 // SetOwnCategories gets a reference to the given []RiskReportCategory and assigns it to the OwnCategories field.
-func (o *AddressRiskReportDetails) SetOwnCategories(v []RiskReportCategory) {
+func (o *TransactionRiskReportDetailsValue) SetOwnCategories(v []RiskReportCategory) {
 	o.OwnCategories = v
 }
 
 // GetSourceOfFundsCategories returns the SourceOfFundsCategories field value if set, zero value otherwise.
-func (o *AddressRiskReportDetails) GetSourceOfFundsCategories() []RiskReportCategory {
+func (o *TransactionRiskReportDetailsValue) GetSourceOfFundsCategories() []RiskReportCategory {
 	if o == nil || o.SourceOfFundsCategories == nil {
 		var ret []RiskReportCategory
 		return ret
@@ -80,7 +80,7 @@ func (o *AddressRiskReportDetails) GetSourceOfFundsCategories() []RiskReportCate
 
 // GetSourceOfFundsCategoriesOk returns a tuple with the SourceOfFundsCategories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AddressRiskReportDetails) GetSourceOfFundsCategoriesOk() ([]RiskReportCategory, bool) {
+func (o *TransactionRiskReportDetailsValue) GetSourceOfFundsCategoriesOk() ([]RiskReportCategory, bool) {
 	if o == nil || o.SourceOfFundsCategories == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *AddressRiskReportDetails) GetSourceOfFundsCategoriesOk() ([]RiskReportC
 }
 
 // HasSourceOfFundsCategories returns a boolean if a field has been set.
-func (o *AddressRiskReportDetails) HasSourceOfFundsCategories() bool {
+func (o *TransactionRiskReportDetailsValue) HasSourceOfFundsCategories() bool {
 	if o != nil && o.SourceOfFundsCategories != nil {
 		return true
 	}
@@ -97,11 +97,11 @@ func (o *AddressRiskReportDetails) HasSourceOfFundsCategories() bool {
 }
 
 // SetSourceOfFundsCategories gets a reference to the given []RiskReportCategory and assigns it to the SourceOfFundsCategories field.
-func (o *AddressRiskReportDetails) SetSourceOfFundsCategories(v []RiskReportCategory) {
+func (o *TransactionRiskReportDetailsValue) SetSourceOfFundsCategories(v []RiskReportCategory) {
 	o.SourceOfFundsCategories = v
 }
 
-func (o AddressRiskReportDetails) MarshalJSON() ([]byte, error) {
+func (o TransactionRiskReportDetailsValue) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.OwnCategories != nil {
 		toSerialize["own_categories"] = o.OwnCategories
@@ -112,38 +112,38 @@ func (o AddressRiskReportDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableAddressRiskReportDetails struct {
-	value *AddressRiskReportDetails
+type NullableTransactionRiskReportDetailsValue struct {
+	value *TransactionRiskReportDetailsValue
 	isSet bool
 }
 
-func (v NullableAddressRiskReportDetails) Get() *AddressRiskReportDetails {
+func (v NullableTransactionRiskReportDetailsValue) Get() *TransactionRiskReportDetailsValue {
 	return v.value
 }
 
-func (v *NullableAddressRiskReportDetails) Set(val *AddressRiskReportDetails) {
+func (v *NullableTransactionRiskReportDetailsValue) Set(val *TransactionRiskReportDetailsValue) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAddressRiskReportDetails) IsSet() bool {
+func (v NullableTransactionRiskReportDetailsValue) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAddressRiskReportDetails) Unset() {
+func (v *NullableTransactionRiskReportDetailsValue) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAddressRiskReportDetails(val *AddressRiskReportDetails) *NullableAddressRiskReportDetails {
-	return &NullableAddressRiskReportDetails{value: val, isSet: true}
+func NewNullableTransactionRiskReportDetailsValue(val *TransactionRiskReportDetailsValue) *NullableTransactionRiskReportDetailsValue {
+	return &NullableTransactionRiskReportDetailsValue{value: val, isSet: true}
 }
 
-func (v NullableAddressRiskReportDetails) MarshalJSON() ([]byte, error) {
+func (v NullableTransactionRiskReportDetailsValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAddressRiskReportDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableTransactionRiskReportDetailsValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

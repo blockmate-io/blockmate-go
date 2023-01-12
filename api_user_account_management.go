@@ -20,32 +20,169 @@ import (
 )
 
 
-// AnalyticsApiService AnalyticsApi service
-type AnalyticsApiService service
+// UserAccountManagementApiService UserAccountManagementApi service
+type UserAccountManagementApiService service
 
-type ApiGetAccountAnalyticsRequest struct {
+type ApiConnectAccountRequest struct {
 	ctx context.Context
-	ApiService *AnalyticsApiService
+	ApiService *UserAccountManagementApiService
+	accountProvider string
+	connectAccountRequest *ConnectAccountRequest
+}
+
+// OK
+func (r ApiConnectAccountRequest) ConnectAccountRequest(connectAccountRequest ConnectAccountRequest) ApiConnectAccountRequest {
+	r.connectAccountRequest = &connectAccountRequest
+	return r
+}
+
+func (r ApiConnectAccountRequest) Execute() (*ConnectAccount200Response, *http.Response, error) {
+	return r.ApiService.ConnectAccountExecute(r)
+}
+
+/*
+ConnectAccount Connect new account
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountProvider URL value from account_providers method
+ @return ApiConnectAccountRequest
+*/
+func (a *UserAccountManagementApiService) ConnectAccount(ctx context.Context, accountProvider string) ApiConnectAccountRequest {
+	return ApiConnectAccountRequest{
+		ApiService: a,
+		ctx: ctx,
+		accountProvider: accountProvider,
+	}
+}
+
+// Execute executes the request
+//  @return ConnectAccount200Response
+func (a *UserAccountManagementApiService) ConnectAccountExecute(r ApiConnectAccountRequest) (*ConnectAccount200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ConnectAccount200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserAccountManagementApiService.ConnectAccount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/{account_provider}/connect"
+	localVarPath = strings.Replace(localVarPath, "{"+"account_provider"+"}", url.PathEscape(parameterToString(r.accountProvider, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.connectAccountRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ConnectAccount400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountHint403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v ConnectAccount405Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteAccountRequest struct {
+	ctx context.Context
+	ApiService *UserAccountManagementApiService
 	accountProvider string
 	accountId string
 }
 
-func (r ApiGetAccountAnalyticsRequest) Execute() (*Analytics, *http.Response, error) {
-	return r.ApiService.GetAccountAnalyticsExecute(r)
+func (r ApiDeleteAccountRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteAccountExecute(r)
 }
 
 /*
-GetAccountAnalytics Get analytics focused on gaming for specified account and provider
-
-Get analytics focused on gaming for specified account and provider. All empty values are omitted from the response. Values are recalculated once per day.
+DeleteAccount Delete account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountProvider URL value from account_providers method
  @param accountId Account ID
- @return ApiGetAccountAnalyticsRequest
+ @return ApiDeleteAccountRequest
 */
-func (a *AnalyticsApiService) GetAccountAnalytics(ctx context.Context, accountProvider string, accountId string) ApiGetAccountAnalyticsRequest {
-	return ApiGetAccountAnalyticsRequest{
+func (a *UserAccountManagementApiService) DeleteAccount(ctx context.Context, accountProvider string, accountId string) ApiDeleteAccountRequest {
+	return ApiDeleteAccountRequest{
 		ApiService: a,
 		ctx: ctx,
 		accountProvider: accountProvider,
@@ -54,21 +191,19 @@ func (a *AnalyticsApiService) GetAccountAnalytics(ctx context.Context, accountPr
 }
 
 // Execute executes the request
-//  @return Analytics
-func (a *AnalyticsApiService) GetAccountAnalyticsExecute(r ApiGetAccountAnalyticsRequest) (*Analytics, *http.Response, error) {
+func (a *UserAccountManagementApiService) DeleteAccountExecute(r ApiDeleteAccountRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Analytics
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetAccountAnalytics")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserAccountManagementApiService.DeleteAccount")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/analytics/{account_provider}/account/{account_id}/stats"
+	localVarPath := localBasePath + "/v1/{account_provider}/account/{account_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"account_provider"+"}", url.PathEscape(parameterToString(r.accountProvider, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"account_id"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
@@ -95,19 +230,19 @@ func (a *AnalyticsApiService) GetAccountAnalyticsExecute(r ApiGetAccountAnalytic
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -115,179 +250,50 @@ func (a *AnalyticsApiService) GetAccountAnalyticsExecute(r ApiGetAccountAnalytic
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UserAPIAuthenticateProject400Response
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountHint403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v UserAPIAuthenticateProject401Response
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v DeleteAccount404Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
-type ApiGetProjectAnalyticsRequest struct {
+type ApiGetAccountHintRequest struct {
 	ctx context.Context
-	ApiService *AnalyticsApiService
-}
-
-func (r ApiGetProjectAnalyticsRequest) Execute() (*map[string]Analytics, *http.Response, error) {
-	return r.ApiService.GetProjectAnalyticsExecute(r)
-}
-
-/*
-GetProjectAnalytics Get analytics focused on gaming for whole project
-
-Get analytics focused on gaming for whole project. All empty values are omitted from the response. Values are recalculated once per day.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetProjectAnalyticsRequest
-*/
-func (a *AnalyticsApiService) GetProjectAnalytics(ctx context.Context) ApiGetProjectAnalyticsRequest {
-	return ApiGetProjectAnalyticsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return map[string]Analytics
-func (a *AnalyticsApiService) GetProjectAnalyticsExecute(r ApiGetProjectAnalyticsRequest) (*map[string]Analytics, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]Analytics
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetProjectAnalytics")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/analytics/project/stats"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UserAPIAuthenticateProject400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v UserAPIAuthenticateProject401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetProviderAnalyticsRequest struct {
-	ctx context.Context
-	ApiService *AnalyticsApiService
+	ApiService *UserAccountManagementApiService
 	accountProvider string
 }
 
-func (r ApiGetProviderAnalyticsRequest) Execute() (*map[string]Analytics, *http.Response, error) {
-	return r.ApiService.GetProviderAnalyticsExecute(r)
+func (r ApiGetAccountHintRequest) Execute() (*GetAccountHint200Response, *http.Response, error) {
+	return r.ApiService.GetAccountHintExecute(r)
 }
 
 /*
-GetProviderAnalytics Get analytics focused on gaming for specified provider
-
-Get analytics focused on gaming for specified provider. All empty values are omitted from the response. Values are recalculated once per day.
+GetAccountHint Get account hint
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountProvider URL value from account_providers method
- @return ApiGetProviderAnalyticsRequest
+ @return ApiGetAccountHintRequest
 */
-func (a *AnalyticsApiService) GetProviderAnalytics(ctx context.Context, accountProvider string) ApiGetProviderAnalyticsRequest {
-	return ApiGetProviderAnalyticsRequest{
+func (a *UserAccountManagementApiService) GetAccountHint(ctx context.Context, accountProvider string) ApiGetAccountHintRequest {
+	return ApiGetAccountHintRequest{
 		ApiService: a,
 		ctx: ctx,
 		accountProvider: accountProvider,
@@ -295,21 +301,21 @@ func (a *AnalyticsApiService) GetProviderAnalytics(ctx context.Context, accountP
 }
 
 // Execute executes the request
-//  @return map[string]Analytics
-func (a *AnalyticsApiService) GetProviderAnalyticsExecute(r ApiGetProviderAnalyticsRequest) (*map[string]Analytics, *http.Response, error) {
+//  @return GetAccountHint200Response
+func (a *UserAccountManagementApiService) GetAccountHintExecute(r ApiGetAccountHintRequest) (*GetAccountHint200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *map[string]Analytics
+		localVarReturnValue  *GetAccountHint200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetProviderAnalytics")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserAccountManagementApiService.GetAccountHint")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/analytics/{account_provider}/stats"
+	localVarPath := localBasePath + "/v1/{account_provider}/connect"
 	localVarPath = strings.Replace(localVarPath, "{"+"account_provider"+"}", url.PathEscape(parameterToString(r.accountProvider, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -355,8 +361,8 @@ func (a *AnalyticsApiService) GetProviderAnalyticsExecute(r ApiGetProviderAnalyt
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UserAPIAuthenticateProject400Response
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountHint403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -365,126 +371,8 @@ func (a *AnalyticsApiService) GetProviderAnalyticsExecute(r ApiGetProviderAnalyt
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v UserAPIAuthenticateProject401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetUserAnalyticsRequest struct {
-	ctx context.Context
-	ApiService *AnalyticsApiService
-}
-
-func (r ApiGetUserAnalyticsRequest) Execute() (*map[string]Analytics, *http.Response, error) {
-	return r.ApiService.GetUserAnalyticsExecute(r)
-}
-
-/*
-GetUserAnalytics Get analytics focused on gaming for this user
-
-Get analytics focused on gaming for this user. All empty values are omitted from the response. Values are recalculated once per day.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUserAnalyticsRequest
-*/
-func (a *AnalyticsApiService) GetUserAnalytics(ctx context.Context) ApiGetUserAnalyticsRequest {
-	return ApiGetUserAnalyticsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return map[string]Analytics
-func (a *AnalyticsApiService) GetUserAnalyticsExecute(r ApiGetUserAnalyticsRequest) (*map[string]Analytics, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]Analytics
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsApiService.GetUserAnalytics")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/analytics/user/stats"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UserAPIAuthenticateProject400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v UserAPIAuthenticateProject401Response
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetAccountHint404Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
