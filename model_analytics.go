@@ -136,54 +136,54 @@ type Analytics struct {
 	CountTxsOut7Gaming *int32 `json:"count_txs_out_7_gaming,omitempty"`
 	// OUT gambling transactions count during last week
 	CountTxsOut7Gambling *int32 `json:"count_txs_out_7_gambling,omitempty"`
-	// Time when first transaction occurred
-	FirstTxsAllOnchain *string `json:"first_txs_all_onchain,omitempty"`
-	// Time when first NFT transaction occurred
-	FirstTxsAllNft *string `json:"first_txs_all_nft,omitempty"`
-	// Time when first gaming transaction occurred
-	FirstTxsAllGaming *string `json:"first_txs_all_gaming,omitempty"`
-	// Time when first gambling transaction occurred
-	FirstTxsAllGambling *string `json:"first_txs_all_gambling,omitempty"`
-	// Time when first IN transaction occurred
-	FirstTxsInOnchain *string `json:"first_txs_in_onchain,omitempty"`
-	// Time when first IN NFT transaction occurred
-	FirstTxsInNft *string `json:"first_txs_in_nft,omitempty"`
-	// Time when first IN gaming transaction occurred
-	FirstTxsInGaming *string `json:"first_txs_in_gaming,omitempty"`
-	// Time when first IN gambling transaction occurred
-	FirstTxsInGambling *string `json:"first_txs_in_gambling,omitempty"`
-	// Time when first OUT transaction occurred
-	FirstTxsOutOnchain *string `json:"first_txs_out_onchain,omitempty"`
-	// Time when first OUT NFT transaction occurred
-	FirstTxsOutNft *string `json:"first_txs_out_nft,omitempty"`
-	// Time when first OUT gaming transaction occurred
-	FirstTxsOutGaming *string `json:"first_txs_out_gaming,omitempty"`
-	// Time when first OUT gambling transaction occurred
-	FirstTxsOutGambling *string `json:"first_txs_out_gambling,omitempty"`
-	// Time when last transaction occurred
-	LastTxsAllOnchain *string `json:"last_txs_all_onchain,omitempty"`
-	// Time when last NFT transaction occurred
-	LastTxsAllNft *string `json:"last_txs_all_nft,omitempty"`
-	// Time when last gaming transaction occurred
-	LastTxsAllGaming *string `json:"last_txs_all_gaming,omitempty"`
-	// Time when last gambling transaction occurred
-	LastTxsAllGambling *string `json:"last_txs_all_gambling,omitempty"`
-	// Time when last IN transaction occurred
-	LastTxsInOnchain *string `json:"last_txs_in_onchain,omitempty"`
-	// Time when last IN NFT transaction occurred
-	LastTxsInNft *string `json:"last_txs_in_nft,omitempty"`
-	// Time when last IN gaming transaction occurred
-	LastTxsInGaming *string `json:"last_txs_in_gaming,omitempty"`
-	// Time when last IN gambling transaction occurred
-	LastTxsInGambling *string `json:"last_txs_in_gambling,omitempty"`
-	// Time when last OUT transaction occurred
-	LastTxsOutOnchain *string `json:"last_txs_out_onchain,omitempty"`
-	// Time when last OUT NFT transaction occurred
-	LastTxsOutNft *string `json:"last_txs_out_nft,omitempty"`
-	// Time when last OUT gaming transaction occurred
-	LastTxsOutGaming *string `json:"last_txs_out_gaming,omitempty"`
-	// Time when last OUT gambling transaction occurred
-	LastTxsOutGambling *string `json:"last_txs_out_gambling,omitempty"`
+	// Unix timestamp when first transaction occurred
+	FirstTxsAllOnchain *int32 `json:"first_txs_all_onchain,omitempty"`
+	// Unix timestamp when first NFT transaction occurred
+	FirstTxsAllNft *int32 `json:"first_txs_all_nft,omitempty"`
+	// Unix timestamp when first gaming transaction occurred
+	FirstTxsAllGaming *int32 `json:"first_txs_all_gaming,omitempty"`
+	// Unix timestamp when first gambling transaction occurred
+	FirstTxsAllGambling *int32 `json:"first_txs_all_gambling,omitempty"`
+	// Unix timestamp when first IN transaction occurred
+	FirstTxsInOnchain *int32 `json:"first_txs_in_onchain,omitempty"`
+	// Unix timestamp when first IN NFT transaction occurred
+	FirstTxsInNft *int32 `json:"first_txs_in_nft,omitempty"`
+	// Unix timestamp when first IN gaming transaction occurred
+	FirstTxsInGaming *int32 `json:"first_txs_in_gaming,omitempty"`
+	// Unix timestamp when first IN gambling transaction occurred
+	FirstTxsInGambling *int32 `json:"first_txs_in_gambling,omitempty"`
+	// Unix timestamp when first OUT transaction occurred
+	FirstTxsOutOnchain *int32 `json:"first_txs_out_onchain,omitempty"`
+	// Unix timestamp when first OUT NFT transaction occurred
+	FirstTxsOutNft *int32 `json:"first_txs_out_nft,omitempty"`
+	// Unix timestamp when first OUT gaming transaction occurred
+	FirstTxsOutGaming *int32 `json:"first_txs_out_gaming,omitempty"`
+	// Unix timestamp when first OUT gambling transaction occurred
+	FirstTxsOutGambling *int32 `json:"first_txs_out_gambling,omitempty"`
+	// Unix timestamp when last transaction occurred
+	LastTxsAllOnchain *int32 `json:"last_txs_all_onchain,omitempty"`
+	// Unix timestamp when last NFT transaction occurred
+	LastTxsAllNft *int32 `json:"last_txs_all_nft,omitempty"`
+	// Unix timestamp when last gaming transaction occurred
+	LastTxsAllGaming *int32 `json:"last_txs_all_gaming,omitempty"`
+	// Unix timestamp when last gambling transaction occurred
+	LastTxsAllGambling *int32 `json:"last_txs_all_gambling,omitempty"`
+	// Unix timestamp when last IN transaction occurred
+	LastTxsInOnchain *int32 `json:"last_txs_in_onchain,omitempty"`
+	// Unix timestamp when last IN NFT transaction occurred
+	LastTxsInNft *int32 `json:"last_txs_in_nft,omitempty"`
+	// Unix timestamp when last IN gaming transaction occurred
+	LastTxsInGaming *int32 `json:"last_txs_in_gaming,omitempty"`
+	// Unix timestamp when last IN gambling transaction occurred
+	LastTxsInGambling *int32 `json:"last_txs_in_gambling,omitempty"`
+	// Unix timestamp when last OUT transaction occurred
+	LastTxsOutOnchain *int32 `json:"last_txs_out_onchain,omitempty"`
+	// Unix timestamp when last OUT NFT transaction occurred
+	LastTxsOutNft *int32 `json:"last_txs_out_nft,omitempty"`
+	// Unix timestamp when last OUT gaming transaction occurred
+	LastTxsOutGaming *int32 `json:"last_txs_out_gaming,omitempty"`
+	// Unix timestamp when last OUT gambling transaction occurred
+	LastTxsOutGambling *int32 `json:"last_txs_out_gambling,omitempty"`
 }
 
 // NewAnalytics instantiates a new Analytics object
@@ -2124,9 +2124,9 @@ func (o *Analytics) SetCountTxsOut7Gambling(v int32) {
 }
 
 // GetFirstTxsAllOnchain returns the FirstTxsAllOnchain field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsAllOnchain() string {
+func (o *Analytics) GetFirstTxsAllOnchain() int32 {
 	if o == nil || o.FirstTxsAllOnchain == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsAllOnchain
@@ -2134,7 +2134,7 @@ func (o *Analytics) GetFirstTxsAllOnchain() string {
 
 // GetFirstTxsAllOnchainOk returns a tuple with the FirstTxsAllOnchain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsAllOnchainOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsAllOnchainOk() (*int32, bool) {
 	if o == nil || o.FirstTxsAllOnchain == nil {
 		return nil, false
 	}
@@ -2150,15 +2150,15 @@ func (o *Analytics) HasFirstTxsAllOnchain() bool {
 	return false
 }
 
-// SetFirstTxsAllOnchain gets a reference to the given string and assigns it to the FirstTxsAllOnchain field.
-func (o *Analytics) SetFirstTxsAllOnchain(v string) {
+// SetFirstTxsAllOnchain gets a reference to the given int32 and assigns it to the FirstTxsAllOnchain field.
+func (o *Analytics) SetFirstTxsAllOnchain(v int32) {
 	o.FirstTxsAllOnchain = &v
 }
 
 // GetFirstTxsAllNft returns the FirstTxsAllNft field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsAllNft() string {
+func (o *Analytics) GetFirstTxsAllNft() int32 {
 	if o == nil || o.FirstTxsAllNft == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsAllNft
@@ -2166,7 +2166,7 @@ func (o *Analytics) GetFirstTxsAllNft() string {
 
 // GetFirstTxsAllNftOk returns a tuple with the FirstTxsAllNft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsAllNftOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsAllNftOk() (*int32, bool) {
 	if o == nil || o.FirstTxsAllNft == nil {
 		return nil, false
 	}
@@ -2182,15 +2182,15 @@ func (o *Analytics) HasFirstTxsAllNft() bool {
 	return false
 }
 
-// SetFirstTxsAllNft gets a reference to the given string and assigns it to the FirstTxsAllNft field.
-func (o *Analytics) SetFirstTxsAllNft(v string) {
+// SetFirstTxsAllNft gets a reference to the given int32 and assigns it to the FirstTxsAllNft field.
+func (o *Analytics) SetFirstTxsAllNft(v int32) {
 	o.FirstTxsAllNft = &v
 }
 
 // GetFirstTxsAllGaming returns the FirstTxsAllGaming field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsAllGaming() string {
+func (o *Analytics) GetFirstTxsAllGaming() int32 {
 	if o == nil || o.FirstTxsAllGaming == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsAllGaming
@@ -2198,7 +2198,7 @@ func (o *Analytics) GetFirstTxsAllGaming() string {
 
 // GetFirstTxsAllGamingOk returns a tuple with the FirstTxsAllGaming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsAllGamingOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsAllGamingOk() (*int32, bool) {
 	if o == nil || o.FirstTxsAllGaming == nil {
 		return nil, false
 	}
@@ -2214,15 +2214,15 @@ func (o *Analytics) HasFirstTxsAllGaming() bool {
 	return false
 }
 
-// SetFirstTxsAllGaming gets a reference to the given string and assigns it to the FirstTxsAllGaming field.
-func (o *Analytics) SetFirstTxsAllGaming(v string) {
+// SetFirstTxsAllGaming gets a reference to the given int32 and assigns it to the FirstTxsAllGaming field.
+func (o *Analytics) SetFirstTxsAllGaming(v int32) {
 	o.FirstTxsAllGaming = &v
 }
 
 // GetFirstTxsAllGambling returns the FirstTxsAllGambling field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsAllGambling() string {
+func (o *Analytics) GetFirstTxsAllGambling() int32 {
 	if o == nil || o.FirstTxsAllGambling == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsAllGambling
@@ -2230,7 +2230,7 @@ func (o *Analytics) GetFirstTxsAllGambling() string {
 
 // GetFirstTxsAllGamblingOk returns a tuple with the FirstTxsAllGambling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsAllGamblingOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsAllGamblingOk() (*int32, bool) {
 	if o == nil || o.FirstTxsAllGambling == nil {
 		return nil, false
 	}
@@ -2246,15 +2246,15 @@ func (o *Analytics) HasFirstTxsAllGambling() bool {
 	return false
 }
 
-// SetFirstTxsAllGambling gets a reference to the given string and assigns it to the FirstTxsAllGambling field.
-func (o *Analytics) SetFirstTxsAllGambling(v string) {
+// SetFirstTxsAllGambling gets a reference to the given int32 and assigns it to the FirstTxsAllGambling field.
+func (o *Analytics) SetFirstTxsAllGambling(v int32) {
 	o.FirstTxsAllGambling = &v
 }
 
 // GetFirstTxsInOnchain returns the FirstTxsInOnchain field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsInOnchain() string {
+func (o *Analytics) GetFirstTxsInOnchain() int32 {
 	if o == nil || o.FirstTxsInOnchain == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsInOnchain
@@ -2262,7 +2262,7 @@ func (o *Analytics) GetFirstTxsInOnchain() string {
 
 // GetFirstTxsInOnchainOk returns a tuple with the FirstTxsInOnchain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsInOnchainOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsInOnchainOk() (*int32, bool) {
 	if o == nil || o.FirstTxsInOnchain == nil {
 		return nil, false
 	}
@@ -2278,15 +2278,15 @@ func (o *Analytics) HasFirstTxsInOnchain() bool {
 	return false
 }
 
-// SetFirstTxsInOnchain gets a reference to the given string and assigns it to the FirstTxsInOnchain field.
-func (o *Analytics) SetFirstTxsInOnchain(v string) {
+// SetFirstTxsInOnchain gets a reference to the given int32 and assigns it to the FirstTxsInOnchain field.
+func (o *Analytics) SetFirstTxsInOnchain(v int32) {
 	o.FirstTxsInOnchain = &v
 }
 
 // GetFirstTxsInNft returns the FirstTxsInNft field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsInNft() string {
+func (o *Analytics) GetFirstTxsInNft() int32 {
 	if o == nil || o.FirstTxsInNft == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsInNft
@@ -2294,7 +2294,7 @@ func (o *Analytics) GetFirstTxsInNft() string {
 
 // GetFirstTxsInNftOk returns a tuple with the FirstTxsInNft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsInNftOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsInNftOk() (*int32, bool) {
 	if o == nil || o.FirstTxsInNft == nil {
 		return nil, false
 	}
@@ -2310,15 +2310,15 @@ func (o *Analytics) HasFirstTxsInNft() bool {
 	return false
 }
 
-// SetFirstTxsInNft gets a reference to the given string and assigns it to the FirstTxsInNft field.
-func (o *Analytics) SetFirstTxsInNft(v string) {
+// SetFirstTxsInNft gets a reference to the given int32 and assigns it to the FirstTxsInNft field.
+func (o *Analytics) SetFirstTxsInNft(v int32) {
 	o.FirstTxsInNft = &v
 }
 
 // GetFirstTxsInGaming returns the FirstTxsInGaming field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsInGaming() string {
+func (o *Analytics) GetFirstTxsInGaming() int32 {
 	if o == nil || o.FirstTxsInGaming == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsInGaming
@@ -2326,7 +2326,7 @@ func (o *Analytics) GetFirstTxsInGaming() string {
 
 // GetFirstTxsInGamingOk returns a tuple with the FirstTxsInGaming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsInGamingOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsInGamingOk() (*int32, bool) {
 	if o == nil || o.FirstTxsInGaming == nil {
 		return nil, false
 	}
@@ -2342,15 +2342,15 @@ func (o *Analytics) HasFirstTxsInGaming() bool {
 	return false
 }
 
-// SetFirstTxsInGaming gets a reference to the given string and assigns it to the FirstTxsInGaming field.
-func (o *Analytics) SetFirstTxsInGaming(v string) {
+// SetFirstTxsInGaming gets a reference to the given int32 and assigns it to the FirstTxsInGaming field.
+func (o *Analytics) SetFirstTxsInGaming(v int32) {
 	o.FirstTxsInGaming = &v
 }
 
 // GetFirstTxsInGambling returns the FirstTxsInGambling field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsInGambling() string {
+func (o *Analytics) GetFirstTxsInGambling() int32 {
 	if o == nil || o.FirstTxsInGambling == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsInGambling
@@ -2358,7 +2358,7 @@ func (o *Analytics) GetFirstTxsInGambling() string {
 
 // GetFirstTxsInGamblingOk returns a tuple with the FirstTxsInGambling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsInGamblingOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsInGamblingOk() (*int32, bool) {
 	if o == nil || o.FirstTxsInGambling == nil {
 		return nil, false
 	}
@@ -2374,15 +2374,15 @@ func (o *Analytics) HasFirstTxsInGambling() bool {
 	return false
 }
 
-// SetFirstTxsInGambling gets a reference to the given string and assigns it to the FirstTxsInGambling field.
-func (o *Analytics) SetFirstTxsInGambling(v string) {
+// SetFirstTxsInGambling gets a reference to the given int32 and assigns it to the FirstTxsInGambling field.
+func (o *Analytics) SetFirstTxsInGambling(v int32) {
 	o.FirstTxsInGambling = &v
 }
 
 // GetFirstTxsOutOnchain returns the FirstTxsOutOnchain field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsOutOnchain() string {
+func (o *Analytics) GetFirstTxsOutOnchain() int32 {
 	if o == nil || o.FirstTxsOutOnchain == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsOutOnchain
@@ -2390,7 +2390,7 @@ func (o *Analytics) GetFirstTxsOutOnchain() string {
 
 // GetFirstTxsOutOnchainOk returns a tuple with the FirstTxsOutOnchain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsOutOnchainOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsOutOnchainOk() (*int32, bool) {
 	if o == nil || o.FirstTxsOutOnchain == nil {
 		return nil, false
 	}
@@ -2406,15 +2406,15 @@ func (o *Analytics) HasFirstTxsOutOnchain() bool {
 	return false
 }
 
-// SetFirstTxsOutOnchain gets a reference to the given string and assigns it to the FirstTxsOutOnchain field.
-func (o *Analytics) SetFirstTxsOutOnchain(v string) {
+// SetFirstTxsOutOnchain gets a reference to the given int32 and assigns it to the FirstTxsOutOnchain field.
+func (o *Analytics) SetFirstTxsOutOnchain(v int32) {
 	o.FirstTxsOutOnchain = &v
 }
 
 // GetFirstTxsOutNft returns the FirstTxsOutNft field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsOutNft() string {
+func (o *Analytics) GetFirstTxsOutNft() int32 {
 	if o == nil || o.FirstTxsOutNft == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsOutNft
@@ -2422,7 +2422,7 @@ func (o *Analytics) GetFirstTxsOutNft() string {
 
 // GetFirstTxsOutNftOk returns a tuple with the FirstTxsOutNft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsOutNftOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsOutNftOk() (*int32, bool) {
 	if o == nil || o.FirstTxsOutNft == nil {
 		return nil, false
 	}
@@ -2438,15 +2438,15 @@ func (o *Analytics) HasFirstTxsOutNft() bool {
 	return false
 }
 
-// SetFirstTxsOutNft gets a reference to the given string and assigns it to the FirstTxsOutNft field.
-func (o *Analytics) SetFirstTxsOutNft(v string) {
+// SetFirstTxsOutNft gets a reference to the given int32 and assigns it to the FirstTxsOutNft field.
+func (o *Analytics) SetFirstTxsOutNft(v int32) {
 	o.FirstTxsOutNft = &v
 }
 
 // GetFirstTxsOutGaming returns the FirstTxsOutGaming field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsOutGaming() string {
+func (o *Analytics) GetFirstTxsOutGaming() int32 {
 	if o == nil || o.FirstTxsOutGaming == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsOutGaming
@@ -2454,7 +2454,7 @@ func (o *Analytics) GetFirstTxsOutGaming() string {
 
 // GetFirstTxsOutGamingOk returns a tuple with the FirstTxsOutGaming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsOutGamingOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsOutGamingOk() (*int32, bool) {
 	if o == nil || o.FirstTxsOutGaming == nil {
 		return nil, false
 	}
@@ -2470,15 +2470,15 @@ func (o *Analytics) HasFirstTxsOutGaming() bool {
 	return false
 }
 
-// SetFirstTxsOutGaming gets a reference to the given string and assigns it to the FirstTxsOutGaming field.
-func (o *Analytics) SetFirstTxsOutGaming(v string) {
+// SetFirstTxsOutGaming gets a reference to the given int32 and assigns it to the FirstTxsOutGaming field.
+func (o *Analytics) SetFirstTxsOutGaming(v int32) {
 	o.FirstTxsOutGaming = &v
 }
 
 // GetFirstTxsOutGambling returns the FirstTxsOutGambling field value if set, zero value otherwise.
-func (o *Analytics) GetFirstTxsOutGambling() string {
+func (o *Analytics) GetFirstTxsOutGambling() int32 {
 	if o == nil || o.FirstTxsOutGambling == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FirstTxsOutGambling
@@ -2486,7 +2486,7 @@ func (o *Analytics) GetFirstTxsOutGambling() string {
 
 // GetFirstTxsOutGamblingOk returns a tuple with the FirstTxsOutGambling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetFirstTxsOutGamblingOk() (*string, bool) {
+func (o *Analytics) GetFirstTxsOutGamblingOk() (*int32, bool) {
 	if o == nil || o.FirstTxsOutGambling == nil {
 		return nil, false
 	}
@@ -2502,15 +2502,15 @@ func (o *Analytics) HasFirstTxsOutGambling() bool {
 	return false
 }
 
-// SetFirstTxsOutGambling gets a reference to the given string and assigns it to the FirstTxsOutGambling field.
-func (o *Analytics) SetFirstTxsOutGambling(v string) {
+// SetFirstTxsOutGambling gets a reference to the given int32 and assigns it to the FirstTxsOutGambling field.
+func (o *Analytics) SetFirstTxsOutGambling(v int32) {
 	o.FirstTxsOutGambling = &v
 }
 
 // GetLastTxsAllOnchain returns the LastTxsAllOnchain field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsAllOnchain() string {
+func (o *Analytics) GetLastTxsAllOnchain() int32 {
 	if o == nil || o.LastTxsAllOnchain == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsAllOnchain
@@ -2518,7 +2518,7 @@ func (o *Analytics) GetLastTxsAllOnchain() string {
 
 // GetLastTxsAllOnchainOk returns a tuple with the LastTxsAllOnchain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsAllOnchainOk() (*string, bool) {
+func (o *Analytics) GetLastTxsAllOnchainOk() (*int32, bool) {
 	if o == nil || o.LastTxsAllOnchain == nil {
 		return nil, false
 	}
@@ -2534,15 +2534,15 @@ func (o *Analytics) HasLastTxsAllOnchain() bool {
 	return false
 }
 
-// SetLastTxsAllOnchain gets a reference to the given string and assigns it to the LastTxsAllOnchain field.
-func (o *Analytics) SetLastTxsAllOnchain(v string) {
+// SetLastTxsAllOnchain gets a reference to the given int32 and assigns it to the LastTxsAllOnchain field.
+func (o *Analytics) SetLastTxsAllOnchain(v int32) {
 	o.LastTxsAllOnchain = &v
 }
 
 // GetLastTxsAllNft returns the LastTxsAllNft field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsAllNft() string {
+func (o *Analytics) GetLastTxsAllNft() int32 {
 	if o == nil || o.LastTxsAllNft == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsAllNft
@@ -2550,7 +2550,7 @@ func (o *Analytics) GetLastTxsAllNft() string {
 
 // GetLastTxsAllNftOk returns a tuple with the LastTxsAllNft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsAllNftOk() (*string, bool) {
+func (o *Analytics) GetLastTxsAllNftOk() (*int32, bool) {
 	if o == nil || o.LastTxsAllNft == nil {
 		return nil, false
 	}
@@ -2566,15 +2566,15 @@ func (o *Analytics) HasLastTxsAllNft() bool {
 	return false
 }
 
-// SetLastTxsAllNft gets a reference to the given string and assigns it to the LastTxsAllNft field.
-func (o *Analytics) SetLastTxsAllNft(v string) {
+// SetLastTxsAllNft gets a reference to the given int32 and assigns it to the LastTxsAllNft field.
+func (o *Analytics) SetLastTxsAllNft(v int32) {
 	o.LastTxsAllNft = &v
 }
 
 // GetLastTxsAllGaming returns the LastTxsAllGaming field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsAllGaming() string {
+func (o *Analytics) GetLastTxsAllGaming() int32 {
 	if o == nil || o.LastTxsAllGaming == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsAllGaming
@@ -2582,7 +2582,7 @@ func (o *Analytics) GetLastTxsAllGaming() string {
 
 // GetLastTxsAllGamingOk returns a tuple with the LastTxsAllGaming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsAllGamingOk() (*string, bool) {
+func (o *Analytics) GetLastTxsAllGamingOk() (*int32, bool) {
 	if o == nil || o.LastTxsAllGaming == nil {
 		return nil, false
 	}
@@ -2598,15 +2598,15 @@ func (o *Analytics) HasLastTxsAllGaming() bool {
 	return false
 }
 
-// SetLastTxsAllGaming gets a reference to the given string and assigns it to the LastTxsAllGaming field.
-func (o *Analytics) SetLastTxsAllGaming(v string) {
+// SetLastTxsAllGaming gets a reference to the given int32 and assigns it to the LastTxsAllGaming field.
+func (o *Analytics) SetLastTxsAllGaming(v int32) {
 	o.LastTxsAllGaming = &v
 }
 
 // GetLastTxsAllGambling returns the LastTxsAllGambling field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsAllGambling() string {
+func (o *Analytics) GetLastTxsAllGambling() int32 {
 	if o == nil || o.LastTxsAllGambling == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsAllGambling
@@ -2614,7 +2614,7 @@ func (o *Analytics) GetLastTxsAllGambling() string {
 
 // GetLastTxsAllGamblingOk returns a tuple with the LastTxsAllGambling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsAllGamblingOk() (*string, bool) {
+func (o *Analytics) GetLastTxsAllGamblingOk() (*int32, bool) {
 	if o == nil || o.LastTxsAllGambling == nil {
 		return nil, false
 	}
@@ -2630,15 +2630,15 @@ func (o *Analytics) HasLastTxsAllGambling() bool {
 	return false
 }
 
-// SetLastTxsAllGambling gets a reference to the given string and assigns it to the LastTxsAllGambling field.
-func (o *Analytics) SetLastTxsAllGambling(v string) {
+// SetLastTxsAllGambling gets a reference to the given int32 and assigns it to the LastTxsAllGambling field.
+func (o *Analytics) SetLastTxsAllGambling(v int32) {
 	o.LastTxsAllGambling = &v
 }
 
 // GetLastTxsInOnchain returns the LastTxsInOnchain field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsInOnchain() string {
+func (o *Analytics) GetLastTxsInOnchain() int32 {
 	if o == nil || o.LastTxsInOnchain == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsInOnchain
@@ -2646,7 +2646,7 @@ func (o *Analytics) GetLastTxsInOnchain() string {
 
 // GetLastTxsInOnchainOk returns a tuple with the LastTxsInOnchain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsInOnchainOk() (*string, bool) {
+func (o *Analytics) GetLastTxsInOnchainOk() (*int32, bool) {
 	if o == nil || o.LastTxsInOnchain == nil {
 		return nil, false
 	}
@@ -2662,15 +2662,15 @@ func (o *Analytics) HasLastTxsInOnchain() bool {
 	return false
 }
 
-// SetLastTxsInOnchain gets a reference to the given string and assigns it to the LastTxsInOnchain field.
-func (o *Analytics) SetLastTxsInOnchain(v string) {
+// SetLastTxsInOnchain gets a reference to the given int32 and assigns it to the LastTxsInOnchain field.
+func (o *Analytics) SetLastTxsInOnchain(v int32) {
 	o.LastTxsInOnchain = &v
 }
 
 // GetLastTxsInNft returns the LastTxsInNft field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsInNft() string {
+func (o *Analytics) GetLastTxsInNft() int32 {
 	if o == nil || o.LastTxsInNft == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsInNft
@@ -2678,7 +2678,7 @@ func (o *Analytics) GetLastTxsInNft() string {
 
 // GetLastTxsInNftOk returns a tuple with the LastTxsInNft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsInNftOk() (*string, bool) {
+func (o *Analytics) GetLastTxsInNftOk() (*int32, bool) {
 	if o == nil || o.LastTxsInNft == nil {
 		return nil, false
 	}
@@ -2694,15 +2694,15 @@ func (o *Analytics) HasLastTxsInNft() bool {
 	return false
 }
 
-// SetLastTxsInNft gets a reference to the given string and assigns it to the LastTxsInNft field.
-func (o *Analytics) SetLastTxsInNft(v string) {
+// SetLastTxsInNft gets a reference to the given int32 and assigns it to the LastTxsInNft field.
+func (o *Analytics) SetLastTxsInNft(v int32) {
 	o.LastTxsInNft = &v
 }
 
 // GetLastTxsInGaming returns the LastTxsInGaming field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsInGaming() string {
+func (o *Analytics) GetLastTxsInGaming() int32 {
 	if o == nil || o.LastTxsInGaming == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsInGaming
@@ -2710,7 +2710,7 @@ func (o *Analytics) GetLastTxsInGaming() string {
 
 // GetLastTxsInGamingOk returns a tuple with the LastTxsInGaming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsInGamingOk() (*string, bool) {
+func (o *Analytics) GetLastTxsInGamingOk() (*int32, bool) {
 	if o == nil || o.LastTxsInGaming == nil {
 		return nil, false
 	}
@@ -2726,15 +2726,15 @@ func (o *Analytics) HasLastTxsInGaming() bool {
 	return false
 }
 
-// SetLastTxsInGaming gets a reference to the given string and assigns it to the LastTxsInGaming field.
-func (o *Analytics) SetLastTxsInGaming(v string) {
+// SetLastTxsInGaming gets a reference to the given int32 and assigns it to the LastTxsInGaming field.
+func (o *Analytics) SetLastTxsInGaming(v int32) {
 	o.LastTxsInGaming = &v
 }
 
 // GetLastTxsInGambling returns the LastTxsInGambling field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsInGambling() string {
+func (o *Analytics) GetLastTxsInGambling() int32 {
 	if o == nil || o.LastTxsInGambling == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsInGambling
@@ -2742,7 +2742,7 @@ func (o *Analytics) GetLastTxsInGambling() string {
 
 // GetLastTxsInGamblingOk returns a tuple with the LastTxsInGambling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsInGamblingOk() (*string, bool) {
+func (o *Analytics) GetLastTxsInGamblingOk() (*int32, bool) {
 	if o == nil || o.LastTxsInGambling == nil {
 		return nil, false
 	}
@@ -2758,15 +2758,15 @@ func (o *Analytics) HasLastTxsInGambling() bool {
 	return false
 }
 
-// SetLastTxsInGambling gets a reference to the given string and assigns it to the LastTxsInGambling field.
-func (o *Analytics) SetLastTxsInGambling(v string) {
+// SetLastTxsInGambling gets a reference to the given int32 and assigns it to the LastTxsInGambling field.
+func (o *Analytics) SetLastTxsInGambling(v int32) {
 	o.LastTxsInGambling = &v
 }
 
 // GetLastTxsOutOnchain returns the LastTxsOutOnchain field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsOutOnchain() string {
+func (o *Analytics) GetLastTxsOutOnchain() int32 {
 	if o == nil || o.LastTxsOutOnchain == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsOutOnchain
@@ -2774,7 +2774,7 @@ func (o *Analytics) GetLastTxsOutOnchain() string {
 
 // GetLastTxsOutOnchainOk returns a tuple with the LastTxsOutOnchain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsOutOnchainOk() (*string, bool) {
+func (o *Analytics) GetLastTxsOutOnchainOk() (*int32, bool) {
 	if o == nil || o.LastTxsOutOnchain == nil {
 		return nil, false
 	}
@@ -2790,15 +2790,15 @@ func (o *Analytics) HasLastTxsOutOnchain() bool {
 	return false
 }
 
-// SetLastTxsOutOnchain gets a reference to the given string and assigns it to the LastTxsOutOnchain field.
-func (o *Analytics) SetLastTxsOutOnchain(v string) {
+// SetLastTxsOutOnchain gets a reference to the given int32 and assigns it to the LastTxsOutOnchain field.
+func (o *Analytics) SetLastTxsOutOnchain(v int32) {
 	o.LastTxsOutOnchain = &v
 }
 
 // GetLastTxsOutNft returns the LastTxsOutNft field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsOutNft() string {
+func (o *Analytics) GetLastTxsOutNft() int32 {
 	if o == nil || o.LastTxsOutNft == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsOutNft
@@ -2806,7 +2806,7 @@ func (o *Analytics) GetLastTxsOutNft() string {
 
 // GetLastTxsOutNftOk returns a tuple with the LastTxsOutNft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsOutNftOk() (*string, bool) {
+func (o *Analytics) GetLastTxsOutNftOk() (*int32, bool) {
 	if o == nil || o.LastTxsOutNft == nil {
 		return nil, false
 	}
@@ -2822,15 +2822,15 @@ func (o *Analytics) HasLastTxsOutNft() bool {
 	return false
 }
 
-// SetLastTxsOutNft gets a reference to the given string and assigns it to the LastTxsOutNft field.
-func (o *Analytics) SetLastTxsOutNft(v string) {
+// SetLastTxsOutNft gets a reference to the given int32 and assigns it to the LastTxsOutNft field.
+func (o *Analytics) SetLastTxsOutNft(v int32) {
 	o.LastTxsOutNft = &v
 }
 
 // GetLastTxsOutGaming returns the LastTxsOutGaming field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsOutGaming() string {
+func (o *Analytics) GetLastTxsOutGaming() int32 {
 	if o == nil || o.LastTxsOutGaming == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsOutGaming
@@ -2838,7 +2838,7 @@ func (o *Analytics) GetLastTxsOutGaming() string {
 
 // GetLastTxsOutGamingOk returns a tuple with the LastTxsOutGaming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsOutGamingOk() (*string, bool) {
+func (o *Analytics) GetLastTxsOutGamingOk() (*int32, bool) {
 	if o == nil || o.LastTxsOutGaming == nil {
 		return nil, false
 	}
@@ -2854,15 +2854,15 @@ func (o *Analytics) HasLastTxsOutGaming() bool {
 	return false
 }
 
-// SetLastTxsOutGaming gets a reference to the given string and assigns it to the LastTxsOutGaming field.
-func (o *Analytics) SetLastTxsOutGaming(v string) {
+// SetLastTxsOutGaming gets a reference to the given int32 and assigns it to the LastTxsOutGaming field.
+func (o *Analytics) SetLastTxsOutGaming(v int32) {
 	o.LastTxsOutGaming = &v
 }
 
 // GetLastTxsOutGambling returns the LastTxsOutGambling field value if set, zero value otherwise.
-func (o *Analytics) GetLastTxsOutGambling() string {
+func (o *Analytics) GetLastTxsOutGambling() int32 {
 	if o == nil || o.LastTxsOutGambling == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.LastTxsOutGambling
@@ -2870,7 +2870,7 @@ func (o *Analytics) GetLastTxsOutGambling() string {
 
 // GetLastTxsOutGamblingOk returns a tuple with the LastTxsOutGambling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Analytics) GetLastTxsOutGamblingOk() (*string, bool) {
+func (o *Analytics) GetLastTxsOutGamblingOk() (*int32, bool) {
 	if o == nil || o.LastTxsOutGambling == nil {
 		return nil, false
 	}
@@ -2886,8 +2886,8 @@ func (o *Analytics) HasLastTxsOutGambling() bool {
 	return false
 }
 
-// SetLastTxsOutGambling gets a reference to the given string and assigns it to the LastTxsOutGambling field.
-func (o *Analytics) SetLastTxsOutGambling(v string) {
+// SetLastTxsOutGambling gets a reference to the given int32 and assigns it to the LastTxsOutGambling field.
+func (o *Analytics) SetLastTxsOutGambling(v int32) {
 	o.LastTxsOutGambling = &v
 }
 

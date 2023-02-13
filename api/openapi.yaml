@@ -1985,34 +1985,34 @@ components:
         count_txs_all_365_gaming: 1
         count_txs_all_30_gambling: 1
         count_txs_out_7_nft: 1
-        first_txs_out_onchain: 2021-10-10T11:11:16Z
-        last_txs_in_gaming: 2021-10-10T11:11:16Z
+        first_txs_out_onchain: 1674481020
+        last_txs_in_gaming: 1674481020
         count_txs_all_30_nft: 1
         count_txs_in_forever_gaming: 1
         count_txs_in_31_60_nft: 1
         count_txs_out_forever_gambling: 1
         count_txs_all_forever_onchain: 1
         count_txs_in_7_gaming: 1
-        first_txs_in_nft: 2021-10-10T11:11:16Z
-        last_txs_in_onchain: 2021-10-10T11:11:16Z
+        first_txs_in_nft: 1674481020
+        last_txs_in_onchain: 1674481020
         count_txs_all_31_60_gambling: 1
-        last_txs_in_nft: 2021-10-10T11:11:16Z
+        last_txs_in_nft: 1674481020
         count_txs_in_31_60_gaming: 1
-        last_txs_in_gambling: 2021-10-10T11:11:16Z
-        first_txs_all_nft: 2021-10-10T11:11:16Z
+        last_txs_in_gambling: 1674481020
+        first_txs_all_nft: 1674481020
         count_txs_out_31_60_gaming: 1
         count_txs_all_7_gambling: 1
         count_txs_all_30_gaming: 1
-        first_txs_in_gaming: 2021-10-10T11:11:16Z
-        last_txs_all_gaming: 2021-10-10T11:11:16Z
+        first_txs_in_gaming: 1674481020
+        last_txs_all_gaming: 1674481020
         count_txs_out_31_60_nft: 1
-        first_txs_out_gambling: 2021-10-10T11:11:16Z
+        first_txs_out_gambling: 1674481020
         count_txs_out_31_60_gambling: 1
         count_txs_in_forever_onchain: 1
         count_txs_all_365_onchain: 1
         count_txs_out_forever_nft: 1
-        last_txs_out_gaming: 2021-10-10T11:11:16Z
-        last_txs_out_nft: 2021-10-10T11:11:16Z
+        last_txs_out_gaming: 1674481020
+        last_txs_out_nft: 1674481020
         count_txs_in_31_60_onchain: 1
         count_txs_all_31_60_onchain: 1
         count_txs_out_365_nft: 1
@@ -2023,47 +2023,47 @@ components:
         count_txs_all_30_onchain: 1
         count_txs_out_30_onchain: 1
         count_txs_in_365_gaming: 1
-        last_txs_all_nft: 2021-10-10T11:11:16Z
+        last_txs_all_nft: 1674481020
         count_txs_in_30_gaming: 1
         count_txs_in_7_onchain: 1
         count_txs_out_30_nft: 1
         count_txs_all_7_gaming: 1
         count_txs_all_365_nft: 1
-        last_txs_out_onchain: 2021-10-10T11:11:16Z
+        last_txs_out_onchain: 1674481020
         count_txs_out_30_gambling: 1
         count_txs_all_forever_gaming: 1
-        last_txs_all_gambling: 2021-10-10T11:11:16Z
+        last_txs_all_gambling: 1674481020
         count_txs_out_7_gambling: 1
-        last_txs_all_onchain: 2021-10-10T11:11:16Z
+        last_txs_all_onchain: 1674481020
         count_txs_in_7_nft: 1
         count_txs_in_365_onchain: 1
-        first_txs_in_gambling: 2021-10-10T11:11:16Z
+        first_txs_in_gambling: 1674481020
         count_txs_out_365_gambling: 1
         count_txs_in_31_60_gambling: 1
-        first_txs_all_gambling: 2021-10-10T11:11:16Z
+        first_txs_all_gambling: 1674481020
         count_txs_out_31_60_onchain: 1
         count_txs_in_forever_gambling: 1
         count_txs_out_forever_onchain: 1
-        first_txs_out_gaming: 2021-10-10T11:11:16Z
+        first_txs_out_gaming: 1674481020
         count_txs_in_forever_nft: 1
         count_txs_in_365_gambling: 1
         count_txs_in_30_nft: 1
-        first_txs_all_gaming: 2021-10-10T11:11:16Z
+        first_txs_all_gaming: 1674481020
         count_txs_all_365_gambling: 1
         count_txs_out_365_onchain: 1
         count_txs_in_30_gambling: 1
-        first_txs_in_onchain: 2021-10-10T11:11:16Z
-        first_txs_out_nft: 2021-10-10T11:11:16Z
+        first_txs_in_onchain: 1674481020
+        first_txs_out_nft: 1674481020
         count_txs_all_31_60_gaming: 1
         count_txs_out_365_gaming: 1
         count_txs_out_7_gaming: 1
-        last_txs_out_gambling: 2021-10-10T11:11:16Z
+        last_txs_out_gambling: 1674481020
         count_txs_all_7_onchain: 1
         count_txs_in_7_gambling: 1
         count_txs_in_30_onchain: 1
         count_txs_out_7_onchain: 1
         count_txs_in_365_nft: 1
-        first_txs_all_onchain: 2021-10-10T11:11:16Z
+        first_txs_all_onchain: 1674481020
       properties:
         count_txs_all_forever_onchain:
           description: Transactions count
@@ -2306,101 +2306,101 @@ components:
           example: 1
           type: integer
         first_txs_all_onchain:
-          description: Time when first transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_all_nft:
-          description: Time when first NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first NFT transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_all_gaming:
-          description: Time when first gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first gaming transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_all_gambling:
-          description: Time when first gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first gambling transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_in_onchain:
-          description: Time when first IN transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first IN transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_in_nft:
-          description: Time when first IN NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first IN NFT transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_in_gaming:
-          description: Time when first IN gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first IN gaming transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_in_gambling:
-          description: Time when first IN gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first IN gambling transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_out_onchain:
-          description: Time when first OUT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first OUT transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_out_nft:
-          description: Time when first OUT NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first OUT NFT transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_out_gaming:
-          description: Time when first OUT gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first OUT gaming transaction occurred
+          example: 1674481020
+          type: integer
         first_txs_out_gambling:
-          description: Time when first OUT gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when first OUT gambling transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_all_onchain:
-          description: Time when last transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_all_nft:
-          description: Time when last NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last NFT transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_all_gaming:
-          description: Time when last gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last gaming transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_all_gambling:
-          description: Time when last gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last gambling transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_in_onchain:
-          description: Time when last IN transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last IN transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_in_nft:
-          description: Time when last IN NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last IN NFT transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_in_gaming:
-          description: Time when last IN gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last IN gaming transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_in_gambling:
-          description: Time when last IN gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last IN gambling transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_out_onchain:
-          description: Time when last OUT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last OUT transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_out_nft:
-          description: Time when last OUT NFT transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last OUT NFT transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_out_gaming:
-          description: Time when last OUT gaming transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last OUT gaming transaction occurred
+          example: 1674481020
+          type: integer
         last_txs_out_gambling:
-          description: Time when last OUT gambling transaction occurred
-          example: 2021-10-10T11:11:16Z
-          type: string
+          description: Unix timestamp when last OUT gambling transaction occurred
+          example: 1674481020
+          type: integer
       title: Analytics
       type: object
     UserAPI_AuthenticateProject_200_response:
